@@ -17,7 +17,6 @@ def createEventOptionsList(root):
 def createEventView(root):
     eventView = LabelFrame(root)
 
-
     eventHeader = createEventHeader(eventView)
     eventHeader.grid(row=0, column=0)
 
@@ -51,3 +50,15 @@ def createConversationForm(root):
     conversationDemandsField.pack()
 
     return conversationForm
+
+def createEventViewer(root, files):
+    eventViewer = Frame(root)
+    filesFrame = uibuilder.createList(eventViewer, "Files", files)
+    filesFrame.grid(row=0, column=0)
+
+    eventsFrame = uibuilder.createList(eventViewer, "Events", [])
+    eventsFrame.grid(row=0, column=1)
+
+    eventView = createEventView(eventViewer)
+    eventView.grid(row=0, column=2)
+    return eventViewer

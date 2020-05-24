@@ -9,14 +9,19 @@ def cli():
 
 @cli.command()
 def load():
-    """Load the files here."""
-    files = fileloader.GetFilesInCurrentFolder()
+    """Load UI."""
+    files = fileloader.GetFilenamesInFolder("./events/")
     kinter.createWindow(files)
 
 @cli.command()
-def files():
-    """Load the files here."""
-    print(fileloader.GetFilesInCurrentFolder())
+def events():
+    """Print the event filenames."""
+    print(fileloader.GetFilenamesInFolder("./events/"))
+
+@cli.command()
+def localisation():
+    """Load the localisation contents."""
+    fileloader.GetLocalizationContentsInFolder("./localisation/english/")
 
 if __name__ == '__main__':
     cli()
