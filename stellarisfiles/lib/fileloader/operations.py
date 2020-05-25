@@ -19,6 +19,5 @@ def GetLocalizationContentsInFolder(localizationDirectorypath):
                 localizations.update(localisationContent)
             except yaml.YAMLError as exc:
                 print(exc)
-                return localizations
                 
     return localizations
