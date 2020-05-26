@@ -3,6 +3,8 @@ import glob
 import os
 import yaml
 
+from . import larkParser as parser
+
 def GetFilenamesInFolder(directoryPath):
     eventFilepaths = glob.glob (os.path.join (directoryPath, "*.txt"))
     return [eventFilepath for eventFilepath in eventFilepaths]
@@ -21,3 +23,6 @@ def GetLocalizationContentsInFolder(localizationDirectorypath):
                 print(exc)
                 
     return localizations
+
+def LoadStellarisFile(filepath):
+    parser.ParseEventFile(filepath)
