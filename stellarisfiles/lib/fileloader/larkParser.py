@@ -57,7 +57,7 @@ def ParseEventFile(eventFilepath):
         with open (eventFilepath, "r") as events:
             tree = eventParser.parse(events.read())
             parsedTree = EventTransformer().transform(tree)
-            pprint(parsedTree)
+            # pprint(parsedTree)
             return parsedTree
             
 
