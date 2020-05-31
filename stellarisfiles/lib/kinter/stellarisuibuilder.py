@@ -1,5 +1,6 @@
 from tkinter import *
 from . import uibuilder as uibuilder
+from .. import fileloader as fileloader 
 
 def createEventHeader(root):
     eventHeader = Frame(root)
@@ -10,6 +11,17 @@ def createEventHeader(root):
     eventDescriptionLabel = uibuilder.createPackedLabel(eventHeader, "Localized description...")
 
     return eventHeader
+
+def openEvents(e):
+    widget = e.widget
+    index = widget.curselection()[0]
+    value = widget.get(index)
+    print ('You selected item', index, value)
+    events = fileloader.LoadStellarisFile(value)
+    for event in events["events"]:
+        if "id" in event:
+            print(event["id"])
+    
 
 def createEventOptionsList(root):
     return uibuilder.createList(root, "Options", ["Option A"])
@@ -51,13 +63,45 @@ def createConversationForm(root):
 
     return conversationForm
 
-def createEventViewer(root, files):
+def createFileView(root, name, files):
+    frame = Frame(root)
+
+    listLabel = uibuilder.createPackedLabel(frame, name)
+
+    listbox = Listbox(frame)
+    listbox.pack()
+
+    for item in files:
+        listbox.insert(END, item)
+    listbox.bind("<<ListboxSelect>>", openEvents)
+    return frame
+
+def createEventList(root, events):
+    return uibuilder.createList(root, "Events", events)
+    
+def getEvents(filepath, localisations):
+    events = fileloader.LoadStellarisFile(filepath)
+    ids = []
+    for event in events["events"]:
+        if "title" in event:
+            eventTitle = event["title"]
+            if eventTitle in localisations:
+                ids.append("%s (%s)" % (localisations[eventTitle], eventTitle))
+            else:
+                ids.append(eventTitle)
+    return ids
+
+def createEventViewer(root, filepaths, localisations):
     eventViewer = Frame(root)
-    filesFrame = uibuilder.createList(eventViewer, "Files", files)
+    filesFrame = createFileView(eventViewer, "Files", filepaths)
     filesFrame.grid(row=0, column=0)
 
-    eventsFrame = uibuilder.createList(eventViewer, "Events", [])
-    eventsFrame.grid(row=0, column=1)
+    events = []
+    if len(filepaths) >= 1:
+        events = getEvents(filepaths[0], localisations)
+        
+    eventsFrame = createEventList(eventViewer, events)    
+    eventsFrame.grid(row=0, column=1)        
 
     eventView = createEventView(eventViewer)
     eventView.grid(row=0, column=2)

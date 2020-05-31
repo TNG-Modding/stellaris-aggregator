@@ -22,7 +22,7 @@ def createList(root, name, items):
 
     listLabel = createPackedLabel(frame, name)
 
-    listbox = Listbox(frame, anchor='nw')
+    listbox = Listbox(frame, width=100)
     listbox.pack()
 
     for item in items:
