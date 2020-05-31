@@ -42,8 +42,10 @@ class EventTransformer(Transformer):
         return str(args).strip('\"')
     def start (self, args):
         definition = {}
+        events = {}
+        definition["events"] = events
         for arg in args:
-            definition[arg[0]] = arg[1]
+            events[arg[0]] = arg[1]
         return definition
     def POSS_SYMB(self, args):
         return args[0]
@@ -55,7 +57,7 @@ def ParseEventFile(eventFilepath):
         with open (eventFilepath, "r") as events:
             tree = eventParser.parse(events.read())
             parsedTree = EventTransformer().transform(tree)
-            print(parsedTree)
+            pprint(parsedTree)
             return parsedTree
             
 
