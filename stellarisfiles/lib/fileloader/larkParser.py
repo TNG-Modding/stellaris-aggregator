@@ -42,10 +42,10 @@ class EventTransformer(Transformer):
         return str(args).strip('\"')
     def start (self, args):
         definition = {}
-        events = {}
+        events = []
         definition["events"] = events
         for arg in args:
-            events[arg[0]] = arg[1]
+            events.append(arg[1])
         return definition
     def POSS_SYMB(self, args):
         return args[0]
