@@ -3,35 +3,47 @@ import os
 from pathlib import Path
 from pprint import pprint
 
-class EventTransformer(Transformer):
-    def define(self, args):
-        definition = {}
-        items = []
+def getValueArgs(args):
+    values = []
+    i = 2
+    while i < len(args):
+        values.append(args[i])
+        i = i + 1      
+    return values
 
-        i = 2
-        while i < len(args):
-            items.append(args[i])
-            i = i + 1            
-        
-        if args[1] != "=":
-            definition["%s%s" % (args[0], args[1])] = items
-        else:
-            definition[args[0]] = items
+def turnIntoDictionary(value):
+    if isinstance(value, tuple):
+        definition = {}
+        definition[value[0]] = value[1]
         return definition
+    return value
+    
+class EventTransformer(Transformer):
+    
+    def define(self, args):
+        values = getValueArgs(args)
+        if len(values) == 1:
+            return args[0], turnIntoDictionary(values[0])
+        else:
+            definition = {}
+            for value in values:
+                definition[value[0]] = turnIntoDictionary(value[1])
+            return args[0], definition
+
     def VAR_STR(self, args):
-        return str(args)
+        return str(args).strip('\"')
     def MAGIC_VALUES(self, args):
-        return str(args)
+        return str(args).strip('\"')
     def DOT_STR(self, args):
-        return str(args)
+        return str(args).strip('\"')
     def STRING(self, args):
-        return str(args)
+        return str(args).strip('\"')
     def set_planet_flag(self, args):
-        return str(args)
+        return str(args).strip('\"')
     def start (self, args):
-        definition = []
+        definition = {}
         for arg in args:
-            definition.append(arg)
+            definition[arg[0]] = arg[1]
         return definition
     def POSS_SYMB(self, args):
         return args[0]
@@ -42,7 +54,8 @@ def ParseEventFile(eventFilepath):
         eventParser = Lark(eventRules)
         with open (eventFilepath, "r") as events:
             tree = eventParser.parse(events.read())
-            # pprint(tree)
-            transformedTree = EventTransformer().transform(tree)
-            pprint(transformedTree)
+            parsedTree = EventTransformer().transform(tree)
+            print(parsedTree)
+            return parsedTree
+            
 
