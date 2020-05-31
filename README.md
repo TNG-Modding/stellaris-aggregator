@@ -43,3 +43,5 @@ And duplicate events such as :
   
     country_event: {},
     country_event: {}
+
+The current parser does not handle country_event vs event. They all are stored under the same.

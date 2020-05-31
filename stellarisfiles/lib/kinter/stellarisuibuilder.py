@@ -83,12 +83,13 @@ def getEvents(filepath, localisations):
     events = fileloader.LoadStellarisFile(filepath)
     ids = []
     for event in events["events"]:
-        if "title" in event:
+        if "title" in event and event["title"] in localisations:
+            eventId = event["id"]
             eventTitle = event["title"]
-            if eventTitle in localisations:
-                ids.append("%s (%s)" % (localisations[eventTitle], eventTitle))
-            else:
-                ids.append(eventTitle)
+            ids.append("%s -- %s" % (eventId, localisations[eventTitle]))
+        elif "id" in event:
+            ids.append(event["id"])
+
     return ids
 
 def createEventViewer(root, filepaths, localisations):
