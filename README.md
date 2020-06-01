@@ -45,3 +45,5 @@ And duplicate events such as :
     country_event: {}
 
 The current parser does not handle country_event vs event. They all are stored under the same.
+Many keys are duplicates, do we convert to list of key value pairs?
+Or do we somehow combine country event into country_events []
