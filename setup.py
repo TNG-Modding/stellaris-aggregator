@@ -8,7 +8,7 @@ setup(
     description = "Creates a ui to view Stellaris event information",
     url = "",
     packages=find_packages(),
-    install_requires=["click", "ensure", "luaparser", "pyyaml", "lark-parser"],
+    install_requires=["click", "ensure", "luaparser", "PyYAML", "lark-parser"],
     entry_points = {
         "console_scripts": ["stellarisfiles=stellarisfiles.cli:cli"]
     },

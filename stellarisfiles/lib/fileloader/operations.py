@@ -2,6 +2,7 @@
 import glob 
 import os
 import yaml
+from pprint import pprint
 
 from . import larkParser as parser
 
@@ -15,18 +16,21 @@ def GetLocalizationContentsInFolder(localizationDirectorypath):
     
     localizations = {}
     for localisationFilepath in localisationFilepaths:
-        with open(localisationFilepath, 'r') as stream:
+        with open(localisationFilepath, 'r', encoding='utf-8-sig') as stream:
             try:
-                localisationContent = yaml.load(stream, Loader=yaml.FullLoader)
-                localizations.update(localisationContent["l_english"])
+                print("Loading %s..." % localisationFilepath)
+                localisationContent = yaml.load(stream, Loader=yaml.FullLoader)["l_english"]
+                localizations.update(localisationContent)
+                
             except yaml.YAMLError as exc:
                 print(exc)
                 
     return localizations
 
 def GetLocalizationContentsFromFile(localisationFilepath):
-    with open(localisationFilepath, 'r') as stream:
+    with open(localisationFilepath, 'r', encoding="utf-8-sig") as stream:
         try:
+            print("Loading %s..." % localisationFilepath)
             return yaml.load(stream, Loader=yaml.FullLoader)["l_english"]
         except yaml.YAMLError as exc:
             print(exc)
