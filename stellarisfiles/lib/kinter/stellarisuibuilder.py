@@ -1,16 +1,7 @@
 from tkinter import *
 from . import uibuilder as uibuilder
 from .. import fileloader as fileloader 
-
-def createEventHeader(root):
-    eventHeader = Frame(root)
-
-    eventIdLabel = uibuilder.createPackedLabel(eventHeader, "Event Id")
-    eventNameLabel = uibuilder.createPackedLabel(eventHeader, "Event Name (Localization)")
-    eventDescriptionHeaderLabel = uibuilder.createPackedLabel(eventHeader, "Event Description")
-    eventDescriptionLabel = uibuilder.createPackedLabel(eventHeader, "Localized description...")
-
-    return eventHeader
+from pprint import pprint
 
 def openEvents(e):
     widget = e.widget
@@ -23,21 +14,12 @@ def openEvents(e):
             print(event["id"])
     
 
-def createEventOptionsList(root):
-    return uibuilder.createList(root, "Options", ["Option A"])
-
-def createEventView(root):
+def createEventView(root, eventSummary):
+    pprint(eventSummary)
     eventView = LabelFrame(root)
-
-    eventHeader = createEventHeader(eventView)
-    eventHeader.grid(row=0, column=0)
-
-    eventOptionsList = createEventOptionsList(eventView)
-    eventOptionsList.grid(row=0, column=1)
-
-    createConversationButton = Button(eventView, text="Create Conversation")
-    createConversationButton.grid(row=1, column=1)
-
+    eventLabel = uibuilder.createPackedLabel(eventView, "Event")
+    eventNameLabel = uibuilder.createPackedLabel(eventView, eventSummary["name"])
+    eventDescription = uibuilder.createPackedLabel(eventView, eventSummary["description"])
     return eventView
 
 def createConversationForm(root):
@@ -63,24 +45,19 @@ def createConversationForm(root):
 
     return conversationForm
 
-def createFileView(root, name, files):
-    frame = Frame(root)
-
-    listLabel = uibuilder.createPackedLabel(frame, name)
-
-    listbox = Listbox(frame)
-    listbox.pack()
-
-    for item in files:
-        listbox.insert(END, item)
-    listbox.bind("<<ListboxSelect>>", openEvents)
-    return frame
+def createFileList(root, files):
+    # for item in files:
+    #     listbox.insert(END, item)
+    # listbox.bind("<<ListboxSelect>>", openEvents)
+    return uibuilder.createList(root, "Files", files, 50, 25)   
 
 def createEventList(root, events):
-    return uibuilder.createList(root, "Events", events)
+    return uibuilder.createList(root, "Events", events, 50, 25)
     
-def getEvents(filepath, localisations):
-    events = fileloader.LoadStellarisFile(filepath)
+def getEvents(filepath):
+    return fileloader.LoadStellarisFile(filepath)
+
+def getEventIds(events, localisations):
     ids = []
     for event in events["events"]:
         if "title" in event and event["title"] in localisations:
@@ -89,21 +66,59 @@ def getEvents(filepath, localisations):
             ids.append("%s -- %s" % (eventId, localisations[eventTitle]))
         elif "id" in event:
             ids.append(event["id"])
-
     return ids
+
+def getEventSummary(event, localisations):
+    eventSummary = {}
+    pprint(event)
+    if "title" in event:
+        if event["title"] in localisations:
+            eventSummary["name"] = "%s -- %s" % (event["id"], localisations[event["title"]])
+        else:
+            eventSummary["name"] = "%s" % (event["id"])
+    else:
+        eventSummary["name"] = "No title"
+
+    if "desc" in event:
+        eventDesc = event["desc"]
+        if not isinstance(eventDesc, str):
+            eventDesc = eventDesc["text"] 
+
+        if eventDesc in localisations:
+            eventSummary["description"] = localisations[eventDesc]
+        else: 
+            eventSummary["description"] = eventDesc
+    else:
+        eventSummary["description"] = "No description"
+
+    return eventSummary
+
+def createOptionList(root, options):
+    return uibuilder.createList(root, "Options", options, 50, 8)
 
 def createEventViewer(root, filepaths, localisations):
     eventViewer = Frame(root)
-    filesFrame = createFileView(eventViewer, "Files", filepaths)
-    filesFrame.grid(row=0, column=0)
+    
+    fileList= createFileList(eventViewer, filepaths)
+    fileList.grid(row=0, column=0)
 
     events = []
+    eventIds = []
     if len(filepaths) >= 1:
-        events = getEvents(filepaths[0], localisations)
-        
-    eventsFrame = createEventList(eventViewer, events)    
-    eventsFrame.grid(row=0, column=1)        
+        events = getEvents(filepaths[0])
+        eventsIds = getEventIds(events, localisations)
 
-    eventView = createEventView(eventViewer)
-    eventView.grid(row=0, column=2)
+    eventsPanel = Frame(eventViewer)
+    eventsPanel.grid(row=0, column=1)
+    
+    eventsList = createEventList(eventsPanel, eventsIds)    
+    eventsList.grid(row=0, column=0)        
+
+    eventSummary = getEventSummary(events["events"][1], localisations)
+    eventView = createEventView(eventsPanel, eventSummary)
+    eventView.grid(row=1, column=0)
+
+    optionsList = createOptionList(eventsPanel, ["Option A"])
+    optionsList.grid(row=2, column = 0)
+
     return eventViewer

@@ -17,12 +17,12 @@ def createTextField(root, labelText, height):
 
     return frame
 
-def createList(root, name, items):
+def createList(root, name, items, w, h):
     frame = Frame(root)
 
     listLabel = createPackedLabel(frame, name)
 
-    listbox = Listbox(frame, width=100)
+    listbox = Listbox(frame, width=w, height=h)
     listbox.pack()
 
     for item in items:

@@ -5,11 +5,13 @@ from . import stellarisuibuilder as stellarisuibuilder
 def createWindow(files, localisations):
     root = Tk()
 
-    conversationView = uibuilder.createList(root, "Conversations", ["Pest Control"])
-    conversationView.grid(row=0, column=0)
-
+    
     eventViewer = stellarisuibuilder.createEventViewer(root, files, localisations)
-    eventViewer.grid(row=0, column=1)
+    eventViewer.grid(row=0, column=0)
+    
+    conversationView = uibuilder.createList(root, "Conversations", ["Pest Control"], 50, 50)
+    conversationView.grid(row=0, column=1)
+
     
     # Conversation
     # conversationEditor = Frame(root)
