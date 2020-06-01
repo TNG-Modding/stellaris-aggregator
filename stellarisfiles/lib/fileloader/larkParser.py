@@ -19,7 +19,6 @@ def turnIntoDictionary(value):
     return value
     
 class EventTransformer(Transformer):
-    
     def define(self, args):
         values = getValueArgs(args)
         if len(values) == 1:
@@ -44,8 +43,17 @@ class EventTransformer(Transformer):
         definition = {}
         events = []
         definition["events"] = events
+        namespace = ""
         for arg in args:
-            events.append(arg[1])
+            if arg[1] == "namespace":
+                namespace = arg[1]
+            else:
+                event = arg[1]
+                eventType = arg[0]
+                event["type"] = eventType
+                event["namespace"] = namespace
+                events.append(event)
+
         return definition
     def POSS_SYMB(self, args):
         return args[0]
@@ -56,6 +64,7 @@ def ParseEventFile(eventFilepath):
         eventParser = Lark(eventRules)
         with open (eventFilepath, "r") as events:
             tree = eventParser.parse(events.read())
+            pprint(tree)
             parsedTree = EventTransformer().transform(tree)
             # pprint(parsedTree)
             return parsedTree
