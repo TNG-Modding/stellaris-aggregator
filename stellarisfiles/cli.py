@@ -9,10 +9,11 @@ def cli():
     pass
 
 @cli.command()
-def load():
+@click.option('--localisation/--no-localisation', default=True, prompt='Include localisation', help='Whether to load localisation files.')
+def load(localisation):
     """Load UI."""
     files = fileloader.GetFilenamesInFolder("./events/")
-    localisations = fileloader.GetLocalizationContentsInFolder("./localisation/english/")
+    localisations = fileloader.GetLocalizationContentsInFolder("./localisation/english/") if localisation else {}
     kinter.createWindow(files, localisations)
 
 @cli.command()
@@ -26,9 +27,9 @@ def localisation():
     fileloader.GetLocalizationContentsInFolder("./localisation/english/")
 
 @cli.command()
-@click.option('--input', prompt='Input file', default="./events/advisor_events.txt", help='The path of where the templated service will go.')
+@click.option('--input', prompt='Input file', default="./events/simplerTest.txt", help='The path of where the templated service will go.')
 def parse(input):
-    fileloader.LoadStellarisFile(input)
+    pprint(fileloader.LoadStellarisFile(input))
 
 if __name__ == '__main__':
     cli()
