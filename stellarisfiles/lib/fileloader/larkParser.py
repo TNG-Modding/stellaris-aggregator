@@ -17,17 +17,17 @@ def turnIntoDictionary(value):
         definition[value[0]] = value[1]
         return definition
     return value
-    
+
 class EventTransformer(Transformer):
     def define(self, args):
         values = getValueArgs(args)
         if len(values) == 1:
-            return args[0], turnIntoDictionary(values[0])
+            return args[0], values[0]
         else:
-            definition = {}
+            definitions = []
             for value in values:
-                definition[value[0]] = turnIntoDictionary(value[1])
-            return args[0], definition
+                definitions.append((value[0], value[1]))
+            return args[0], definitions
 
     def VAR_STR(self, args):
         return str(args).strip('\"')
@@ -40,19 +40,7 @@ class EventTransformer(Transformer):
     def set_planet_flag(self, args):
         return str(args).strip('\"')
     def start (self, args):
-        definition = {}
-        events = []
-        definition["events"] = events
-        namespace = ""
-        for arg in args:
-            if arg[1] == "namespace":
-                namespace = arg[1]
-            else:
-                event = arg[1]
-                eventType = arg[0]
-                event["type"] = eventType
-                event["namespace"] = namespace
-                events.append(event)
+        return args
 
         return definition
     def POSS_SYMB(self, args):
