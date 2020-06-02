@@ -1,6 +1,7 @@
 from tkinter import *
 from . import uibuilder as uibuilder
 from .. import fileloader as fileloader 
+from . import eventReader as eventReader
 from pprint import pprint
 
 def openEvents(e):
@@ -57,42 +58,6 @@ def createEventList(root, events):
 def getEvents(filepath):
     return fileloader.LoadStellarisFile(filepath)
 
-def getEventIds(events, localisations):
-    ids = []
-    for event in events["events"]:
-        if "title" in event and event["title"] in localisations:
-            eventId = event["id"]
-            eventTitle = event["title"]
-            ids.append("%s -- %s" % (eventId, localisations[eventTitle]))
-        elif "id" in event:
-            ids.append(event["id"])
-    return ids
-
-def getEventSummary(event, localisations):
-    eventSummary = {}
-    pprint(event)
-    if "title" in event:
-        if event["title"] in localisations:
-            eventSummary["name"] = "%s -- %s" % (event["id"], localisations[event["title"]])
-        else:
-            eventSummary["name"] = "%s" % (event["id"])
-    else:
-        eventSummary["name"] = "No title"
-
-    if "desc" in event:
-        eventDesc = event["desc"]
-        if not isinstance(eventDesc, str):
-            eventDesc = eventDesc["text"] 
-
-        if eventDesc in localisations:
-            eventSummary["description"] = localisations[eventDesc]
-        else: 
-            eventSummary["description"] = eventDesc
-    else:
-        eventSummary["description"] = "No description"
-
-    return eventSummary
-
 def createOptionList(root, options):
     return uibuilder.createList(root, "Options", options, 50, 8)
 
@@ -105,8 +70,8 @@ def createEventViewer(root, filepaths, localisations):
     events = []
     eventIds = []
     if len(filepaths) >= 1:
-        events = getEvents(filepaths[0])
-        eventsIds = getEventIds(events, localisations)
+        events = getEvents(filepaths[1])
+        eventsIds = eventReader.getEventIds(events, localisations)
 
     eventsPanel = Frame(eventViewer)
     eventsPanel.grid(row=0, column=1)
@@ -114,11 +79,15 @@ def createEventViewer(root, filepaths, localisations):
     eventsList = createEventList(eventsPanel, eventsIds)    
     eventsList.grid(row=0, column=0)        
 
-    eventSummary = getEventSummary(events["events"][1], localisations)
+    event = {}
+    if len(filepaths) >= 1:
+        event = events["events"][1]
+
+    eventSummary =  eventReader.getEventSummary(event, localisations)
     eventView = createEventView(eventsPanel, eventSummary)
     eventView.grid(row=1, column=0)
 
-    optionsList = createOptionList(eventsPanel, ["Option A"])
+    optionsList = createOptionList(eventsPanel, eventSummary["options"])
     optionsList.grid(row=2, column = 0)
 
     return eventViewer

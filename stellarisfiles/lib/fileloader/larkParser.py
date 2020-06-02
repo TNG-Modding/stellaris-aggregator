@@ -40,9 +40,14 @@ class EventTransformer(Transformer):
     def set_planet_flag(self, args):
         return str(args).strip('\"')
     def start (self, args):
-        return args
-
-        return definition
+        eventFile = {}
+        eventFile["events"] = []
+        for arg in args:
+            if arg[0] == "namespace":
+                continue
+            
+            eventFile["events"].append(arg)
+        return eventFile
     def POSS_SYMB(self, args):
         return args[0]
 
@@ -52,7 +57,7 @@ def ParseEventFile(eventFilepath):
         eventParser = Lark(eventRules)
         with open (eventFilepath, "r") as events:
             tree = eventParser.parse(events.read())
-            pprint(tree)
+            # pprint(tree)
             parsedTree = EventTransformer().transform(tree)
             # pprint(parsedTree)
             return parsedTree
