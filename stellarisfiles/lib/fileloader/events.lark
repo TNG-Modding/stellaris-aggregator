@@ -21,8 +21,8 @@ bracketless_define: name POSS_SYMB _NEWLINE* values _NEWLINE? -> define
 // Values that can appear on the left hand side of non-global definitions
 ?name:  LOGIC_WORDS
     |   MAGIC_VALUES
-    |   VAR_STR
     |   DOT_STR
+    |   VAR_STR
     |   STRING
     |   NUMBER
 
@@ -40,9 +40,11 @@ bracketless_define: name POSS_SYMB _NEWLINE* values _NEWLINE? -> define
 // For the "package name" type values seen in ID's and such.
 // Shouldn't count ones inside of quotation marks.
 DOT_STR: /([A-Za-z_]+[A-Za-z0-9_\-]*[\.\:\@])([A-Za-z_0-9\-]+[\.\:\@]?)+/
+//DOT_STR: /([A-Za-z0-9_\-]+[\.\:\@])([A-Za-z_0-9\-]+[\.\:\@]?)+/
 
 // For strings that are not escaped by quotation marks
 VAR_STR: /[A-Za-z_]+[A-Za-z0-9_\-]*/
+// VAR_STR: /[A-Za-z0-9_\-]+/
 
 // Includes the @ sign at the beginning
 GLOBAL_NAME: /\@[A-Za-z]+[A-Za-z0-9]*/
@@ -51,6 +53,7 @@ MAGIC_VALUES:   "FROM"
         |       "ROOT"
         |       "yes"
         |       "no"
+
 LOGIC_WORDS:    "OR"
         |       "AND"
         |       "NOT"
@@ -67,7 +70,8 @@ _BLANK_LINE: /[\t ]+\n/
 _NEWLINE: ( NL | COMMENT | _BLANK_LINE )+
 
 STRING: _STRING
-NUMBER: _NUMBER
+// Do not match .9 as a number, it isn't used in stellaris and will match non deterministically match the .2 in galcom.2a.desc
+NUMBER: /[0-9]+(\.[0-9]+)*/
 
 %import common.ESCAPED_STRING   -> _STRING
 %import common.SIGNED_NUMBER    -> _NUMBER

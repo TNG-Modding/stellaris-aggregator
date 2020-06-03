@@ -33,7 +33,7 @@ def getEventDescription(event, localizations):
     eventDesc = findFirstChild(event, "desc")
     if not eventDesc is None:
         if not isinstance(eventDesc, str):
-            eventDesc = findFirstChild(eventDesc, "text")         
+            eventDesc = findFirstChild(eventDesc, "text") 
         return localizations[eventDesc] if eventDesc in localizations else eventDesc
     
     return "No description"
