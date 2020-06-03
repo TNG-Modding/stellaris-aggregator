@@ -47,12 +47,5 @@ def getEventSummary(event, localisations):
 def getEventIds(events, localisations):
     ids = []
     for event in events["events"]:
-        pprint(even)
-        eventTitle = findFirstChild(event, "title")
-        eventId = findFirstChild(event, "id")
-
-        if not eventTitle is None and eventTitle in localisations:
-            ids.append("%s -- %s" % (eventId, localisations[eventTitle]))
-        if not eventId is None:
-            ids.append("%s" % (eventId))
+        ids.append(getEventSummary(event,localisations)["name"])
     return ids

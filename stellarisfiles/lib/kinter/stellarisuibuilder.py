@@ -81,7 +81,7 @@ def createEventViewer(root, filepaths, localisations):
 
     event = {}
     if len(filepaths) >= 1:
-        event = events["events"][1]
+        event = events["events"][0]
 
     eventSummary =  eventReader.getEventSummary(event, localisations)
     eventView = createEventView(eventsPanel, eventSummary)
