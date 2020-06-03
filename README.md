@@ -1,6 +1,6 @@
 # stellarisfiles
 
-## Localisation fixes
+## localization fixes
 
 (:)(?=[0-9]{1}|\s"{1}) with middot
 (?<!l_english):{1} with nothing

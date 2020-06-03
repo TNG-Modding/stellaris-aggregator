@@ -11,41 +11,57 @@ def findAllChildren(eventContents, key):
             children.append(keyValue[1])
     return children
 
-def getEventName(event, localisations):
+def localizeValue (identifier, localizations):
+    if identifier is None:
+        return { "id": identifier, "local": None, "isLocalized": False }
+
+    isLocalized = identifier in localizations
+    return { "id": identifier, "local": localizations[identifier] if isLocalized else None, "isLocalized": isLocalized }
+
+def getEventName(event, localizations):
     eventTitle = findFirstChild(event, "title")
     eventId = findFirstChild(event, "id")
 
-    if not eventTitle is None and eventTitle in localisations:
-        return "%s -- %s" % (eventId, localisations[eventTitle])
+    if not eventTitle is None and eventTitle in localizations:
+        return "%s -- %s" % (eventId, localizations[eventTitle])
     if not eventId is None:
         return "%s" % (eventId)
     
     return "No title"
 
-def getEventDescription(event, localisations):
+def getEventDescription(event, localizations):
     eventDesc = findFirstChild(event, "desc")
     if not eventDesc is None:
         if not isinstance(eventDesc, str):
             eventDesc = findFirstChild(eventDesc, "text")         
-        return localisations[eventDesc] if eventDesc in localisations else eventDesc
+        return localizations[eventDesc] if eventDesc in localizations else eventDesc
     
     return "No description"
 
-def getEventOptions(event, localisations):
-    return findAllChildren(event, "option")
+def getEventOptions(event, localizations):
+    options = findAllChildren(event, "option")
+    eventOptions = []
+    for option in options:
+        eventOption = {}
+        eventName = findFirstChild(option, "name")
+        eventTooltip = findFirstChild(option, "custom_tooltip")
+        eventOption["name"] = localizations[eventName] if eventName in localizations else eventName
+        eventOption["tooltip"] = localizations[eventTooltip] if eventTooltip in localizations else eventTooltip
+        eventOptions.append(eventOption)
+    return eventOptions 
 
-def getEventSummary(event, localisations):
+def getEventSummary(event, localizations):
     eventSummary = {}
     eventContents = event[1]
     
-    eventSummary["name"] = getEventName(eventContents, localisations)
-    eventSummary["description"] = getEventDescription(eventContents, localisations)
-    eventSummary["options"] = getEventOptions(event, localisations)
+    eventSummary["name"] = getEventName(eventContents, localizations)
+    eventSummary["description"] = getEventDescription(eventContents, localizations)
+    eventSummary["options"] = getEventOptions(eventContents, localizations)
 
     return eventSummary
 
-def getEventIds(events, localisations):
+def getEventIds(events, localizations):
     ids = []
     for event in events["events"]:
-        ids.append(getEventSummary(event,localisations)["name"])
+        ids.append(getEventSummary(event,localizations)["name"])
     return ids

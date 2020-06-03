@@ -12,25 +12,25 @@ def GetFilenamesInFolder(directoryPath):
 
 def GetLocalizationContentsInFolder(localizationDirectorypath):
     localizationYamlPattern = os.path.join(localizationDirectorypath,"*.yml")
-    localisationFilepaths = glob.glob(localizationYamlPattern)
+    localizationFilepaths = glob.glob(localizationYamlPattern)
     
     localizations = {}
-    for localisationFilepath in localisationFilepaths:
-        with open(localisationFilepath, 'r', encoding='utf-8-sig') as stream:
+    for localizationFilepath in localizationFilepaths:
+        with open(localizationFilepath, 'r', encoding='utf-8-sig') as stream:
             try:
-                print("Loading %s..." % localisationFilepath)
-                localisationContent = yaml.load(stream, Loader=yaml.FullLoader)["l_english"]
-                localizations.update(localisationContent)
+                print("Loading %s..." % localizationFilepath)
+                localizationContent = yaml.load(stream, Loader=yaml.FullLoader)["l_english"]
+                localizations.update(localizationContent)
                 
             except yaml.YAMLError as exc:
                 print(exc)
                 
     return localizations
 
-def GetLocalizationContentsFromFile(localisationFilepath):
-    with open(localisationFilepath, 'r', encoding="utf-8-sig") as stream:
+def GetLocalizationContentsFromFile(localizationFilepath):
+    with open(localizationFilepath, 'r', encoding="utf-8-sig") as stream:
         try:
-            print("Loading %s..." % localisationFilepath)
+            print("Loading %s..." % localizationFilepath)
             return yaml.load(stream, Loader=yaml.FullLoader)["l_english"]
         except yaml.YAMLError as exc:
             print(exc)

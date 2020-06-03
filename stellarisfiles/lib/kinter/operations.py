@@ -2,11 +2,11 @@ from tkinter import *
 from . import uibuilder as uibuilder
 from . import stellarisuibuilder as stellarisuibuilder
 
-def createWindow(files, localisations):
+def createWindow(files, localizations):
     root = Tk()
 
     
-    eventViewer = stellarisuibuilder.createEventViewer(root, files, localisations)
+    eventViewer = stellarisuibuilder.createEventViewer(root, files, localizations)
     eventViewer.grid(row=0, column=0)
     
     conversationView = uibuilder.createList(root, "Conversations", ["Pest Control"], 50, 50)

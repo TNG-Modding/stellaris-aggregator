@@ -9,12 +9,12 @@ def cli():
     pass
 
 @cli.command()
-@click.option('--localisation/--no-localisation', default=True, prompt='Include localisation', help='Whether to load localisation files.')
-def load(localisation):
+@click.option('--localization/--no-localization', default=True, prompt='Include localization', help='Whether to load localization files.')
+def load(localization):
     """Load UI."""
     files = fileloader.GetFilenamesInFolder("./events/")
-    localisations = fileloader.GetLocalizationContentsInFolder("./localisation/english/") if localisation else {}
-    kinter.createWindow(files, localisations)
+    localizations = fileloader.GetLocalizationContentsInFolder("./localisation/english/") if localization else {}
+    kinter.createWindow(files, localizations)
 
 @cli.command()
 def events():
@@ -22,8 +22,8 @@ def events():
     print(fileloader.GetFilenamesInFolder("./events/"))
 
 @cli.command()
-def localisation():
-    """Load the localisation contents."""
+def localization():
+    """Load the localization contents."""
     fileloader.GetLocalizationContentsInFolder("./localisation/english/")
 
 @cli.command()

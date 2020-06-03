@@ -16,7 +16,6 @@ def openEvents(e):
     
 
 def createEventView(root, eventSummary):
-    pprint(eventSummary)
     eventView = LabelFrame(root)
     eventLabel = uibuilder.createPackedLabel(eventView, "Event")
     eventNameLabel = uibuilder.createPackedLabel(eventView, eventSummary["name"])
@@ -61,7 +60,7 @@ def getEvents(filepath):
 def createOptionList(root, options):
     return uibuilder.createList(root, "Options", options, 50, 8)
 
-def createEventViewer(root, filepaths, localisations):
+def createEventViewer(root, filepaths, localizations):
     eventViewer = Frame(root)
     
     fileList= createFileList(eventViewer, filepaths)
@@ -70,8 +69,8 @@ def createEventViewer(root, filepaths, localisations):
     events = []
     eventIds = []
     if len(filepaths) >= 1:
-        events = getEvents(filepaths[1])
-        eventsIds = eventReader.getEventIds(events, localisations)
+        events = getEvents(filepaths[0])
+        eventsIds = eventReader.getEventIds(events, localizations)
 
     eventsPanel = Frame(eventViewer)
     eventsPanel.grid(row=0, column=1)
@@ -81,13 +80,17 @@ def createEventViewer(root, filepaths, localisations):
 
     event = {}
     if len(filepaths) >= 1:
-        event = events["events"][0]
+        event = events["events"][1]
 
-    eventSummary =  eventReader.getEventSummary(event, localisations)
+    eventSummary =  eventReader.getEventSummary(event, localizations)
     eventView = createEventView(eventsPanel, eventSummary)
     eventView.grid(row=1, column=0)
 
-    optionsList = createOptionList(eventsPanel, eventSummary["options"])
+    optionNames = []
+    for option in eventSummary["options"]:
+        optionNames.append(option["name"])
+
+    optionsList = createOptionList(eventsPanel, optionNames)
     optionsList.grid(row=2, column = 0)
 
     return eventViewer
