@@ -1,23 +1,7 @@
 from tkinter import *
-from . import uibuilder as uibuilder
-from . import stellarisuibuilder as stellarisuibuilder
+from .views.mainApplication import MainApplication
 
-def createWindow(files, localizations):
+def createWindow(filepaths, localizations):
     root = Tk()
-
-    
-    eventViewer = stellarisuibuilder.createEventViewer(root, files, localizations)
-    eventViewer.grid(row=0, column=0)
-    
-    conversationView = uibuilder.createList(root, "Conversations", ["Pest Control"], 50, 50)
-    conversationView.grid(row=0, column=1)
-
-    
-    # Conversation
-    # conversationEditor = Frame(root)
-    # conversationEditor.grid(row=1, column=0)
-
-    # conversationForm = stellarisuibuilder.createConversationForm(conversationEditor)
-    # conversationForm.grid(row=0, column=1)
-
+    MainApplication(root, filepaths, localizations).pack(side="top", fill="both", expand=True)
     root.mainloop()

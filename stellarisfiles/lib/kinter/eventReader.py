@@ -1,3 +1,5 @@
+from ..fileloader import operations as fileloader 
+
 def findFirstChild(eventContents, key):
     for keyValue in eventContents:
         if keyValue[0] == key:
@@ -17,6 +19,9 @@ def localizeValue (identifier, localizations):
 
     isLocalized = identifier in localizations
     return { "id": identifier, "local": localizations[identifier] if isLocalized else None, "isLocalized": isLocalized }
+
+def getEvents(filepath):
+    return fileloader.LoadStellarisFile(filepath)
 
 def getEventName(event, localizations):
     eventTitle = findFirstChild(event, "title")
