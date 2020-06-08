@@ -4,6 +4,17 @@ class PackedLabel(Label):
     def __init__(self, parent, labelText):
         Label.__init__(self, parent, text=labelText, anchor='nw')
         self.pack(fill='both')
+    def updateText(self, text):
+        self["text"] = text
+
+class FixedWidthLabel(Frame):
+    def __init__(self, parent, labelText, w, h):
+        Frame.__init__(self, parent, width=w, height=h)
+        self.label = Label(self, text=labelText, anchor='nw')
+        self.label.pack(fill="both", expand=1)
+
+    def updateText(self, text):
+        self.label["text"] = text
 
 class PackedFieldTextField(Frame):
     def __init__(self, parent, labelText, height):

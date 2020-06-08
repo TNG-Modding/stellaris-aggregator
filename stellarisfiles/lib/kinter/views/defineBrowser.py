@@ -40,7 +40,7 @@ class EventDefines(Frame):
         self.eventsList.grid(row=0, column=0)    
         self.eventsList.getListbox().bind("<<ListboxSelect>>", self.loadEvent)
 
-        self.eventView = EventView(self, None)
+        self.eventView = EventView(self)
         self.eventView.grid(row=1, column=0)
 
         self.optionsList = OptionList(self, [])
@@ -86,7 +86,7 @@ class EventView(Frame):
         self.eventNameLabel["text"] = eventSummary["name"]
         self.eventDescription["text"] = eventSummary["description"]
 
-    def __init__(self, parent, eventSummary):
+    def __init__(self, parent):
         Frame.__init__(self, parent)
         self.eventLabel = PackedLabel(self, "Event")
         self.eventNameLabel = PackedLabel(self, "Name")
