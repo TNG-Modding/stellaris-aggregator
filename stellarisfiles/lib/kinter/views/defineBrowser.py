@@ -1,8 +1,18 @@
 from tkinter import *
 from .modules import *
 from .. import eventReader
+import os
+from pprint import pprint
 
 class DefineBrowser(Frame):
+
+    def openFilepath(self, e):
+        widget = e.widget
+        index = widget.curselection()[0]
+        filepath = widget.get(index)
+        print ('You selected file', index, filepath)
+        
+        self.eventDefines.loadEvents(filepath)
 
     def loadFilepaths(self, filepaths):
         self.filepaths = filepaths
@@ -14,18 +24,21 @@ class DefineBrowser(Frame):
     
         self.fileList = FileList(self, [])
         self.fileList.grid(row=0, column=0)
+        self.fileList.getListbox().bind("<<ListboxSelect>>", self.openFilepath)
 
-        self.eventDefines = EventDefines(self)
-        self.fileList.grid(row=0, column=1)
+        self.eventDefines = EventDefines(self, localizations)
+        self.eventDefines.grid(row=0, column=1)
 
 class EventDefines(Frame):
 
-    def __init__(self, parent):
+    def __init__(self, parent, localizations):
         Frame.__init__(self, parent)
         self.parent = parent 
+        self.localizations = localizations
 
         self.eventsList = EventList(self, [])    
         self.eventsList.grid(row=0, column=0)    
+        self.eventsList.getListbox().bind("<<ListboxSelect>>", self.loadEvent)
 
         self.eventView = EventView(self, None)
         self.eventView.grid(row=1, column=0)
@@ -33,31 +46,33 @@ class EventDefines(Frame):
         self.optionsList = OptionList(self, [])
         self.optionsList.grid(row=2, column = 0)
 
-    def loadEvents(self, filepath, localizations):
+    def loadEvents(self, filepath):
         events = []
         eventIds = []
-        if len(filepaths) >= 1:
-            events = eventReader.getEvents(filepath)
-            eventsIds = eventReader.getEventIds(events, localizations)
+        self.events = eventReader.getEvents(filepath)
+        eventsIds = eventReader.getEventIds(self.events, self.localizations)
+        self.eventsList.replaceListItems(eventsIds)
+
+    def loadEvent(self, e):
+        widget = e.widget
+        index = widget.curselection()[0]
+        eventId = widget.get(index)
         
-        self.events = events
-
-        self.eventsList = EventList(self, eventsIds)    
-        self.eventsList.grid(row=0, column=0)  
-
-    def loadEvent(self, event, localizations):
-        eventSummary =  eventReader.getEventSummary(event, localizations)
-        self.eventView = EventView(self, eventSummary)
+        print ('You selected event', index, eventId)
+        event = self.events["events"][index]
+        eventSummary =  eventReader.getEventSummary(event, self.localizations)
+        
+        self.eventView.loadEventSummary(eventSummary)
         
         optionNames = []
         for option in eventSummary["options"]:
             optionNames.append(option["name"])
-
-        self.optionsList = OptionList(self, optionNames)
+        self.optionsList.replaceListItems(optionNames)
 
 class FileList(PackedList):
     def __init__(self, parent, filepaths):
-        PackedList.__init__(self, parent, "Files", filepaths, 50, 25)
+        # os.path.basename(your_path)
+        PackedList.__init__(self, parent, "Files", filepaths, 50, 38)
         self.parent = parent
 
 class EventList(PackedList):
@@ -68,9 +83,8 @@ class EventList(PackedList):
 class EventView(Frame):
 
     def loadEventSummary(self, eventSummary):
-        self.eventLabel = PackedLabel(self, "Event")
-        self.eventNameLabel = PackedLabel(self, eventSummary["name"])
-        self.eventDescription = PackedLabel(self, eventSummary["description"])
+        self.eventNameLabel["text"] = eventSummary["name"]
+        self.eventDescription["text"] = eventSummary["description"]
 
     def __init__(self, parent, eventSummary):
         Frame.__init__(self, parent)

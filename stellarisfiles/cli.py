@@ -12,22 +12,22 @@ def cli():
 @click.option('--localization/--no-localization', default=True, prompt='Include localization', help='Whether to load localization files.')
 def load(localization):
     """Load UI."""
-    files = fileloader.GetFilenamesInFolder("./events/")
-    localizations = fileloader.GetLocalizationContentsInFolder("./localisation/english/") if localization else {}
+    files = fileloader.GetFilenamesInFolder("/Volumes/Storage/stellaris-defines/events/")
+    localizations = fileloader.GetLocalizationContentsInFolder("/Volumes/Storage/stellaris-defines/localisation/english/") if localization else {}
     kinter.createWindow(files, localizations)
 
 @cli.command()
 def events():
     """Print the event filenames."""
-    print(fileloader.GetFilenamesInFolder("./events/"))
+    print(fileloader.GetFilenamesInFolder("/Volumes/Storage/stellaris-defines/events/"))
 
 @cli.command()
 def localization():
     """Load the localization contents."""
-    fileloader.GetLocalizationContentsInFolder("./localisation/english/")
+    fileloader.GetLocalizationContentsInFolder("/Volumes/Storage/stellaris-defines/localisation/english/")
 
 @cli.command()
-@click.option('--input', prompt='Input file', default="./events/simplerTest.txt", help='The path of where the templated service will go.')
+@click.option('--input', prompt='Input file', default="/Volumes/Storage/stellaris-defines/events/simplerTest.txt", help='The path of where the templated service will go.')
 def parse(input):
     pprint(fileloader.LoadStellarisFile(input))
 

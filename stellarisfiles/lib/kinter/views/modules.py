@@ -18,6 +18,9 @@ class PackedFieldTextField(Frame):
 
 class PackedList(Frame):
 
+    def getListbox(self):
+        return self.ListBox
+
     def replaceListItems(self, items):
         self.ListBox.delete(0,'end')
         for item in items:
@@ -28,7 +31,7 @@ class PackedList(Frame):
 
         self.Label = PackedLabel(self, name)
 
-        self.ListBox = Listbox(self, width=w, height=h)
+        self.ListBox = Listbox(self, width=w, height=h, exportselection=False)
         self.ListBox.pack()
 
         for item in items:
