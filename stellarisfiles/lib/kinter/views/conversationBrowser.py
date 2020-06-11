@@ -12,7 +12,7 @@ class ConversationBrowser(Frame):
         widget = e.widget
         index = widget.curselection()[0]
         conversationId = widget.get(index)
-        print ('You selected conversation', index, conversationId)
+        # print ('You selected conversation', index, conversationId)
         self.conversationForm.loadConversation(self.conversations[index])
 
     def loadConversations(self, conversations):

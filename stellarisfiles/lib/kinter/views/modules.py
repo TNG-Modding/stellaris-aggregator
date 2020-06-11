@@ -32,7 +32,8 @@ class PackedTextField(Frame):
 
 class PackedEntryField(Frame):
     def updateText(self, text):
-        self.TextField["text"] = text
+        self.TextField.delete(0, "end")
+        self.TextField.insert(0, text)
 
     def __init__(self, parent, labelText):
         Frame.__init__(self, parent)

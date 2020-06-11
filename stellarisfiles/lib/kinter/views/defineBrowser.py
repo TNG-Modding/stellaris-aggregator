@@ -84,13 +84,14 @@ class EventView(Frame):
 
     def loadEventSummary(self, eventSummary):
         self.eventNameLabel["text"] = eventSummary["name"]
-        self.eventDescription["text"] = eventSummary["description"]
+        self.eventDescription.updateText(eventSummary["description"])
 
     def __init__(self, parent):
         Frame.__init__(self, parent)
         self.eventLabel = PackedLabel(self, "Event")
         self.eventNameLabel = PackedLabel(self, "Name")
-        self.eventDescription = PackedLabel(self, "Description")
+        self.eventDescription = PackedTextField(self, "Description", 4)
+        self.eventDescription.pack()
         self.parent = parent
 
 class OptionList(PackedList):
