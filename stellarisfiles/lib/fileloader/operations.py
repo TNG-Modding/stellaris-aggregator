@@ -2,6 +2,7 @@
 import glob 
 import os
 import yaml
+import json
 from pprint import pprint
 
 from . import larkParser as parser
@@ -37,3 +38,15 @@ def GetLocalizationContentsFromFile(localizationFilepath):
 
 def LoadStellarisFile(filepath):
     return parser.ParseEventFile(filepath)
+
+def ReadConversationsInFolder (directoryPath):
+    conversationsPattern = os.path.join(directoryPath,"*.json")
+    conversationFiles = glob.glob(conversationsPattern)
+    conversations = []
+
+    for conversationFile in conversationFiles:
+        with open(conversationFile, 'r') as jsonFile:
+            loadedConversations = json.load(jsonFile)
+            conversations = conversations + loadedConversations["conversations"]
+
+    return conversations

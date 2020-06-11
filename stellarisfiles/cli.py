@@ -12,14 +12,19 @@ def cli():
 @click.option('--localization/--no-localization', default=True, prompt='Include localization', help='Whether to load localization files.')
 def load(localization):
     """Load UI."""
+    conversations = fileloader.ReadConversationsInFolder("../galactic-conversation/conversations/")
     files = fileloader.GetFilenamesInFolder("/Volumes/Storage/stellaris-defines/events/")
     localizations = fileloader.GetLocalizationContentsInFolder("/Volumes/Storage/stellaris-defines/localisation/english/") if localization else {}
-    kinter.createWindow(files, localizations)
+    kinter.createWindow(files, conversations, localizations)
 
 @cli.command()
 def events():
     """Print the event filenames."""
     print(fileloader.GetFilenamesInFolder("/Volumes/Storage/stellaris-defines/events/"))
+
+@cli.command()
+def conversations():
+    pprint(fileloader.ReadConversationsInFolder("../galactic-conversation/conversations/"))
 
 @cli.command()
 def localization():

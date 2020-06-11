@@ -1,7 +1,7 @@
 from tkinter import *
 from .views.mainApplication import MainApplication
 
-def createWindow(filepaths, localizations):
+def createWindow(filepaths, conversations, localizations):
     root = Tk()
-    MainApplication(root, filepaths, localizations).pack(side="top", fill="both", expand=True)
+    MainApplication(root, filepaths, conversations, localizations).pack(side="top", fill="both", expand=True)
     root.mainloop()

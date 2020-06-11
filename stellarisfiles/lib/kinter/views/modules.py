@@ -16,16 +16,32 @@ class FixedWidthLabel(Frame):
     def updateText(self, text):
         self.label["text"] = text
 
-class PackedFieldTextField(Frame):
+class PackedTextField(Frame):
+    def updateText(self, text):
+        self.TextField.delete("1.0", "end")
+        self.TextField.insert("1.0", text)
+
     def __init__(self, parent, labelText, height):
         Frame.__init__(self, parent)
 
-        self.FieldLabel = Label(frame, text=labelText, anchor='nw')
+        self.FieldLabel = Label(self, text=labelText)
         self.FieldLabel.grid(row=0, column=0)
         
-        self.TextField = Entry(frame, width=30, anchor='nw')
-        self.TextField.insert(0, labelText)
-        self.TextField.grid(row=0, column=1)
+        self.TextField = Text(self, width=60, height=height)
+        self.TextField.grid(row=1, column=0)
+
+class PackedEntryField(Frame):
+    def updateText(self, text):
+        self.TextField["text"] = text
+
+    def __init__(self, parent, labelText):
+        Frame.__init__(self, parent)
+
+        self.FieldLabel = Label(self, text=labelText)
+        self.FieldLabel.grid(row=0, column=0)
+        
+        self.TextField = Entry(self, width=60)
+        self.TextField.grid(row=1, column=0)
 
 class PackedList(Frame):
 
