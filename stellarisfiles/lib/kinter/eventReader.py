@@ -70,3 +70,16 @@ def getEventIds(events, localizations):
     for event in events["events"]:
         ids.append(getEventSummary(event,localizations)["name"])
     return ids
+
+def getOptionListHeader(options, localizations):
+    ids = []
+    for option in options:
+        optionHeader = option["name"]
+        if "tooltip" in option and option["tooltip"] != None:
+            if len(option["tooltip"]) >= 30:
+                optionHeader += " -- " + option["tooltip"][0:30] + "..."
+            else:
+                optionHeader += " -- " + option["tooltip"]
+            
+        ids.append(optionHeader)
+    return ids

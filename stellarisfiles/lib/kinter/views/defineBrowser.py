@@ -43,8 +43,8 @@ class EventDefines(Frame):
         self.eventView = EventView(self)
         self.eventView.grid(row=1, column=0)
 
-        self.optionsList = OptionList(self, [])
-        self.optionsList.grid(row=2, column = 0)
+        self.conversationCreator = ConversationCreator(self)
+        self.conversationCreator.grid(row=2, column = 0)
 
     def loadEvents(self, filepath):
         events = []
@@ -63,11 +63,7 @@ class EventDefines(Frame):
         eventSummary =  eventReader.getEventSummary(event, self.localizations)
         
         self.eventView.loadEventSummary(eventSummary)
-        
-        optionNames = []
-        for option in eventSummary["options"]:
-            optionNames.append(option["name"])
-        self.optionsList.replaceListItems(optionNames)
+        self.conversationCreator.loadOptions(eventSummary["options"], self.localizations)
 
 class FileList(PackedList):
     def __init__(self, parent, filepaths):
@@ -93,6 +89,26 @@ class EventView(Frame):
         self.eventDescription = PackedTextField(self, "Description", 4)
         self.eventDescription.pack()
         self.parent = parent
+
+class ConversationCreator(Frame):
+    def loadOptions(self, options, localizations):
+        self.options = options
+        optionNames = eventReader.getOptionListHeader(options, localizations)
+        self.optionList.replaceListItems(optionNames)
+
+    def createConversation(self):
+        print("Create conversation")
+        currentlySelected = self.optionList.getCurrentlySelected()
+        print(self.options[currentlySelected[0]])
+
+    def __init__(self, parent):
+        Frame.__init__(self, parent)
+        self.parent = parent
+
+        self.optionList = OptionList(self, [])
+        self.optionList.pack()
+
+        self.createConversationButton = PackedButton(self, "Get or Create Conversation", command=self.createConversation)
 
 class OptionList(PackedList):
     def __init__(self, parent, optionNames):
