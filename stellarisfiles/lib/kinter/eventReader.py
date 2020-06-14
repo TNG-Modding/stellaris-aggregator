@@ -1,4 +1,5 @@
-from ..fileloader import operations as fileloader 
+from ..fileloader import operations as fileloader
+import os
 
 def findFirstChild(eventContents, key):
     for keyValue in eventContents:
@@ -48,17 +49,19 @@ def getEventOptions(event, localizations):
     eventOptions = []
     for option in options:
         eventOption = {}
-        eventName = findFirstChild(option, "name")
-        eventTooltip = findFirstChild(option, "custom_tooltip")
-        eventOption["name"] = localizations[eventName] if eventName in localizations else eventName
-        eventOption["tooltip"] = localizations[eventTooltip] if eventTooltip in localizations else eventTooltip
+        optionId = findFirstChild(option, "name")
+        optionTooltip = findFirstChild(option, "custom_tooltip")
+        eventOption["id"] = optionId
+        eventOption["name"] = localizations[optionId] if optionId in localizations else optionId
+        eventOption["tooltip"] = localizations[optionTooltip] if optionTooltip in localizations else optionTooltip
         eventOptions.append(eventOption)
     return eventOptions 
 
 def getEventSummary(event, localizations):
     eventSummary = {}
     eventContents = event[1]
-    
+
+    eventSummary["id"] = findFirstChild(eventContents, "id")
     eventSummary["name"] = getEventName(eventContents, localizations)
     eventSummary["description"] = getEventDescription(eventContents, localizations)
     eventSummary["options"] = getEventOptions(eventContents, localizations)
@@ -83,3 +86,6 @@ def getOptionListHeader(options, localizations):
             
         ids.append(optionHeader)
     return ids
+
+def getFileNameForFilepath(filepath):
+    return os.path.basename(filepath)

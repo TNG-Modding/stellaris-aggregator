@@ -1,7 +1,9 @@
 from tkinter import *
 from .modules import *
 from .. import conversationReader
+
 class ConversationList(PackedList):
+    
     def __init__(self, parent, conversations):
         PackedList.__init__(self, parent, "Conversations", conversations, 50, 38)
         self.parent = parent
@@ -17,7 +19,15 @@ class ConversationBrowser(Frame):
 
     def loadConversations(self, conversations):
         self.conversations = conversations
-        self.conversationList.replaceListItems(conversationReader.getConversationListHeaders(conversations))
+        self.conversationList.replaceListItems(conversationReader.getConversationListHeaders(self.conversations))
+
+    def addConversation(self, conversation):
+        lastIndex = len(self.conversations)
+        print("Added conversation", conversation)
+        self.conversations.append(conversation)
+        self.conversationList.replaceListItems(conversationReader.getConversationListHeaders(self.conversations))
+        self.conversationList.getListbox().select_set(lastIndex)
+        self.conversationList.getListbox().event_generate("<<ListboxSelect>>")
         
     def __init__(self, parent):
         Frame.__init__(self, parent)
@@ -31,6 +41,7 @@ class ConversationBrowser(Frame):
         self.conversationForm.grid(row=0, column=1)
 
 class ConversationForm(Frame):
+
     def loadConversation(self, conversation):
         self.conversationVarnameField.updateText(conversation["varname"])
         self.conversationNameField.updateText(conversation["name"])

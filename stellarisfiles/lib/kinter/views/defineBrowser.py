@@ -1,6 +1,8 @@
 from tkinter import *
 from .modules import *
 from .. import eventReader
+from .. import conversationCreator
+from ..models.conversationLocation import ConversationLocation
 import os
 from pprint import pprint
 
@@ -50,6 +52,9 @@ class EventDefines(Frame):
         events = []
         eventIds = []
         self.events = eventReader.getEvents(filepath)
+        self.filename = eventReader.getFileNameForFilepath(filepath)
+        print("Set filename to ", self.filename)
+
         eventsIds = eventReader.getEventIds(self.events, self.localizations)
         self.eventsList.replaceListItems(eventsIds)
 
@@ -59,19 +64,21 @@ class EventDefines(Frame):
         eventId = widget.get(index)
         
         print ('You selected event', index, eventId)
-        event = self.events["events"][index]
-        eventSummary =  eventReader.getEventSummary(event, self.localizations)
+        self.event = self.events["events"][index]
+        eventSummary =  eventReader.getEventSummary(self.event, self.localizations)
         
         self.eventView.loadEventSummary(eventSummary)
-        self.conversationCreator.loadOptions(eventSummary["options"], self.localizations)
+        self.conversationCreator.loadOptions(self.filename, eventSummary["id"], eventSummary["options"], self.localizations)
 
 class FileList(PackedList):
+
     def __init__(self, parent, filepaths):
         # os.path.basename(your_path)
         PackedList.__init__(self, parent, "Files", filepaths, 50, 38)
         self.parent = parent
 
 class EventList(PackedList):
+
     def __init__(self, parent, eventsNames):
         PackedList.__init__(self, parent, "Events", eventsNames, 50, 25)
         self.parent = parent
@@ -91,7 +98,11 @@ class EventView(Frame):
         self.parent = parent
 
 class ConversationCreator(Frame):
-    def loadOptions(self, options, localizations):
+
+    def loadOptions(self, filename, eventId, options, localizations):
+        self.filename = filename
+        self.eventId = eventId
+
         self.options = options
         optionNames = eventReader.getOptionListHeader(options, localizations)
         self.optionList.replaceListItems(optionNames)
@@ -99,7 +110,12 @@ class ConversationCreator(Frame):
     def createConversation(self):
         print("Create conversation")
         currentlySelected = self.optionList.getCurrentlySelected()
-        print(self.options[currentlySelected[0]])
+        
+        option = self.options[currentlySelected[0]]
+        print(self.filename, self.eventId, option["id"])
+        conversationLocation = conversationCreator.createConversationLocation(self.filename, self.eventId, option["id"])
+        conversation = conversationCreator.createConversationForOption(conversationLocation, option["id"], option["name"])
+        print(self.parent.parent.parent.conversationBrowser.addConversation(conversation))
 
     def __init__(self, parent):
         Frame.__init__(self, parent)
