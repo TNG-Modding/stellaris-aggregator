@@ -1,0 +1,10 @@
+README.md
+setup.py
+stellarisfiles/__init__.py
+stellarisfiles/cli.py
+stellarisfiles.egg-info/PKG-INFO
+stellarisfiles.egg-info/SOURCES.txt
+stellarisfiles.egg-info/dependency_links.txt
+stellarisfiles.egg-info/entry_points.txt
+stellarisfiles.egg-info/requires.txt
+stellarisfiles.egg-info/top_level.txt

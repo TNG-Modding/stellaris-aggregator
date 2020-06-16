@@ -1,0 +1,3 @@
+[console_scripts]
+stellarisfiles = stellarisfiles.cli:cli
+
