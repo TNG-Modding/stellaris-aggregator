@@ -23,3 +23,24 @@ yarn-debug.log*
 yarn-error.log*
 
 *.egg-info
+vscode
+*.rbxl
+*.rbxlx
+*.rbxlx.lock
+*.rbxl.lock
+output/
+*.pyc
+__pycache__/
+*.pyc
+credentials.json
+*.pickle
+*.egg-info/
+build/
+dist/
+.token
+.thenextguy_token
+.vscode
+.freeze
+.resources
+.python-resources*
+.brew-resources*
