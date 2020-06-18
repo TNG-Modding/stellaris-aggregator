@@ -1,0 +1,16 @@
+.list-group {
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.file-list, .event-list, .option-list {
+
+}
+
+.file-list, .conversation-list 
+{
+    min-height: 100%;
+    height: 100%;
+    
+}
