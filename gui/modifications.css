@@ -4,13 +4,21 @@
     -webkit-overflow-scrolling: touch;
 }
 
-.file-list, .event-list, .option-list {
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+html {
+    height: 100%;
+}
 
+.file-list, .event-list, .option-list {
+    
 }
 
 .file-list, .conversation-list 
 {
     min-height: 100%;
     height: 100%;
-    
 }

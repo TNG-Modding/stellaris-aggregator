@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
+    
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <link rel="stylesheet" type="text/css" href="./bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./modifications.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    
+    <script src="linkers/eventParser.js"></script>
     <title>Stellaris Conversations</title>
   </head>
   <body>
     
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    
 
-    <div class="w-screen mt-4">
+    <div class="container-fluid">
+      <p>We are using Node.js <span id="node-version"></span>,
+      Chromium <span id="chrome-version"></span>,
+      and Electron <span id="electron-version"></span>.</p>
       <div class="row">
         <div class="col-xs-2">
-          <p>Events</p>
+          <p>Event Files</p>
           <ul class="list-group">
-            <button type="button" class="list-group-item">Filename</button>
-            <button type="button" class="list-group-item">Filename</button>
+            <button type="button" onclick="parseEventFile('/Volumes/Storage/stellaris-defines/events/galactic_community_events.txt')" class="list-group-item">/Volumes/Storage/stellaris-defines/events/galactic_community_events.txt'</button>
+            <button type="button" onclick="print('wow')" class="list-group-item">Filename</button>
             <button type="button" class="list-group-item">Filename</button>
             <button type="button" class="list-group-item">Filename</button>
           </ul>
