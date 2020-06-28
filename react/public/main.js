@@ -8,6 +8,8 @@ const isDev = require('electron-is-dev');
 
 let mainWindow;
 
+require('electron-reload')(__dirname);
+
 function createWindow() {
   mainWindow = new BrowserWindow({width: 1920,
     height: 1080,});

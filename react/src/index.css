@@ -11,3 +11,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.demand-name {
+  float: left;
+}
+.demand-delete {
+  float: right;
+}
+
+.demand-delete:hover {
+  cursor: pointer;
+}
