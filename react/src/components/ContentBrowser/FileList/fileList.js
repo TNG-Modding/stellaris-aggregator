@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
+import FileItem from "./fileItem"
 
 const filenames = ["galactic_community_events.txt", "anomalies.txt"]
 
 class FileList extends Component {
     onFileClick = (filename) => {
-        console.log(filename);
+        this.props.openFileFn(filename);
+    }
+
+    componentDidMount = () => {
+        
     }
 
     render() {  
@@ -13,10 +18,7 @@ class FileList extends Component {
             <p>Event Files</p>
             <ul className="list-group flex-grow-1">
                 {filenames.map(filename => 
-                    <button key={filename} type="button" 
-                        onClick={() => this.onFileClick(filename)} className="list-group-item">
-                        {filename}
-                    </button>
+                    <FileItem filename={filename} openFileFn={this.props.openFileFn}/>
                 )}            
             </ul>
         </div>

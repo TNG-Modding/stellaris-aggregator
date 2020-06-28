@@ -30,7 +30,7 @@ class ConversationList extends Component {
                 <p>Conversations</p>
                 <ul className="list-group">
                     {this.state.conversations.map((conversation, index) => 
-                        <button key={index} type="button" className="list-group-item">{conversation.name}</button>
+                        <button key={index} type="button" className="list-group-item text-left">{conversation.name}</button>
                     )}            
                 </ul>
             </div>
@@ -45,7 +45,7 @@ class ConversationSourceList extends Component {
             <p>Conversation Sources</p>
             <ul className="list-group">
             {conversationSources.map(conversationSource => 
-                <button key={conversationSource.filename + conversationSource.eventId + conversationSource.optionId}type="button" className="list-group-item">
+                <button key={conversationSource.filename + conversationSource.eventId + conversationSource.optionId}type="button" className="list-group-item text-left">
                     <span>{conversationSource.filename}</span> /
                     <span>{conversationSource.eventId}</span> /
                     <span>{conversationSource.optionId}</span>
