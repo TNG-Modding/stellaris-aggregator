@@ -13,15 +13,15 @@ class App extends Component {
   }
   render () {
     return (
-      <div className="container-fluid">
-        <div className="row"> 
-          <div className="col-xs-2">
+      <div className="container-fluid h-100"> 
+        <div className="row h-100"> 
+          <div className="col-md-2">
             <FileList /> 
           </div>
-          <div className="col-xs-2">
+          <div className="col-md-4">
             <EventSelector /> 
           </div> 
-          <div className="col-xs-8">
+          <div className="col-md-6">
             <ConversationView />
           </div>
         </div> 

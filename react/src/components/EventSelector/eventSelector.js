@@ -1,32 +1,48 @@
 import React, {Component} from 'react';
 
-const options = [{name: "Option name", id: 1}]
-const events = [{name: "Event name", id: 1}]
+const options = [{name: "Option name", id: 1}];
 
-function EventList (props) {
-return (
-    <div>
-        <p>Event</p>
-        <ul className="list-group">
-            {events.map(event => 
-                <button key={event.Id} type="button" className="list-group-item">{event.Name}</button>
-            )}            
-        </ul>
-    </div>
-);
+class EventList extends Component {
+    constructor () {
+        super();
+        this.state = {
+            events: [{name: "Event name"}]
+        }
+    }
+    render() {
+        return (
+            <div>
+                <p>Events</p>
+                <ul className="list-group">
+                    {this.state.events.map((event, index) => 
+                        <button key={index} type="button" className="list-group-item">{event.name}</button>
+                    )}            
+                </ul>
+            </div>
+        );
+    }
 }
 
-function EventOptionList (props) {
-return (
-    <div>
-        <p>Options</p>
-        <ul className="list-group">
-            {options.map(option => 
-                <button key={option.Id} type="button" className="list-group-item">{option.Name}</button>
-            )}            
-        </ul>
-    </div>
-);
+class EventOptionList extends Component {
+    constructor () {
+        super();
+        this.state = {
+            events: [{name: "Option name"}]
+        }
+    }
+    render() {
+        return (
+            <div>
+                <p>Options</p>
+                <ul className="list-group">
+                    {options.map((option, index) => 
+                        <button key={index} type="button" className="list-group-item">{option.name}</button>
+                    )}            
+                </ul>
+            </div>
+        );
+    }
+    
 }
 
 function EventSelector (props) {

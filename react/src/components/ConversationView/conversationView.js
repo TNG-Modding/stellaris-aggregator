@@ -2,52 +2,59 @@ import React, {Component} from 'react';
 
 import DemandList from "./DemandList/demandList"
 
-const conversations = [{name: "Conversation name", id: 1}]
 const conversationSources = [{filename:"file", eventId: "event.id", optionId:"option.Id"}]
 
 function ConversationView (props) {
     return (
         <div className="row">
-        <div className="col-xs-4">
-            <ConversationList />
-        </div>
-        <div className="col-xs-8">
-            <ConversationViewer />
-        </div>
+            <div className="col-md-4 ">
+                <ConversationList />
+            </div>
+            <div className="col-md-8">
+                <ConversationViewer />
+            </div>
         </div>
     );
 }
 
-function ConversationList (props) {
-    return (
-        <div>
-            <p>Conversations</p>
-            <ul className="list-group">
-                {conversations.map(conversation => 
-                    <button key={conversation.Id} type="button" className="list-group-item">{conversation.Name}</button>
-                )}            
-            </ul>
-        </div>
-    );
+class ConversationList extends Component {
+    constructor () {
+        super();
+        this.state = {
+            conversations: [{name: "Conversation name"}]
+        }
+    }
+    render() {
+        return (
+            <div>
+                <p>Conversations</p>
+                <ul className="list-group">
+                    {this.state.conversations.map((conversation, index) => 
+                        <button key={index} type="button" className="list-group-item">{conversation.name}</button>
+                    )}            
+                </ul>
+            </div>
+        );
+    }
 }
 
 class ConversationSourceList extends Component {
-render() {
-    return (
-    <div>
-        <p>Conversation Sources</p>
-        <ul className="list-group">
-        {conversationSources.map(conversationSource => 
-            <button key={conversationSource.filename + conversationSource.eventId + conversationSource.optionId}type="button" className="list-group-item">
-                <span>{conversationSource.filename}</span> /
-                <span>{conversationSource.eventId}</span> /
-                <span>{conversationSource.optionId}</span>
-            </button>
-        )}
-        </ul>
-    </div>
-    );
-}
+    render() {
+        return (
+        <div>
+            <p>Conversation Sources</p>
+            <ul className="list-group">
+            {conversationSources.map(conversationSource => 
+                <button key={conversationSource.filename + conversationSource.eventId + conversationSource.optionId}type="button" className="list-group-item">
+                    <span>{conversationSource.filename}</span> /
+                    <span>{conversationSource.eventId}</span> /
+                    <span>{conversationSource.optionId}</span>
+                </button>
+            )}
+            </ul>
+        </div>
+        );
+    }
 }
 
 

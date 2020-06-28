@@ -33,7 +33,7 @@ class AddDemand extends Component {
             return;
         }
         const result = await this.props.addDemandFn(this.state.demand)
-        if (result != 0) {
+        if (result !== 0) {
             return;
         }
         document.getElementById("demand-input").value = ""

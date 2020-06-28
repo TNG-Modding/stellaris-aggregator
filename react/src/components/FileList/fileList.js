@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-const filenames = ["/Volumes/Storage/stellaris-defines/events/galactic_community_events.txt", "/Volumes/Storage/stellaris-defines/events/anomalies.txt"]
+const filenames = ["galactic_community_events.txt", "anomalies.txt"]
 
 class FileList extends Component {
     onFileClick = (filename) => {
@@ -9,9 +9,9 @@ class FileList extends Component {
 
     render() {  
         return (
-        <div>
+        <div className="file-list h-100">
             <p>Event Files</p>
-            <ul className="list-group">
+            <ul className="list-group flex-grow-1">
                 {filenames.map(filename => 
                     <button key={filename} type="button" 
                         onClick={() => this.onFileClick(filename)} className="list-group-item">
