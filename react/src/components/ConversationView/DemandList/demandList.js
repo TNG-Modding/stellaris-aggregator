@@ -15,13 +15,14 @@ class DemandsList extends Component {
         return (
         <div className="demands-list">
             <h4>Demands</h4>
+            <AddDemand addDemandFn={this.AddDemand}/>
             <ul className="list-group">
             {this.state.demands.map((demand, index) => 
                 <DemandItem demand={demand} key={demand} index={index} removeDemandFn={this.RemoveDemand}/>
             )}
             </ul>
             
-            <AddDemand addDemandFn={this.AddDemand}/>
+            
         </div>
         );
     }

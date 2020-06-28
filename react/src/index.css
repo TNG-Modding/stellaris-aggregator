@@ -16,9 +16,15 @@ code {
   float: left;
 }
 .demand-delete {
+  display: none;
   float: right;
+  color: gray;
 }
 
 .demand-delete:hover {
   cursor: pointer;
+}
+
+.demand:hover .demand-delete, .demand.hover .demand-delete { 
+  display: block; 
 }
