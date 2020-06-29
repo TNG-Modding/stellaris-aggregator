@@ -4,18 +4,16 @@
   "private": true,
   "main": "public/main.js",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.0.0-beta",
     "child_process": "^1.0.2",
+    "electron": "^9.0.5",
     "electron-is-dev": "^1.2.0",
     "jquery": "^3.3.1",
-    "path": "^0.12.7",
     "python-shell": "^2.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "request": "^2.88.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -41,7 +39,6 @@
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
-    "electron": "^9.0.5",
     "electron-builder": "^22.7.0",
     "electron-reload": "^1.5.0",
     "wait-on": "^5.0.1"

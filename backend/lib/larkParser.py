@@ -1,6 +1,7 @@
 from lark import Lark, Transformer, v_args
 import os
 from pathlib import Path
+from pprint import pprint
 
 def getValueArgs(args):
     values = []
@@ -56,7 +57,9 @@ def ParseEventFile(eventFilepath):
         eventParser = Lark(eventRules)
         with open (eventFilepath, "r") as events:
             tree = eventParser.parse(events.read())
+            # pprint(tree)
             parsedTree = EventTransformer().transform(tree)
+            # pprint(parsedTree)
             return parsedTree
             
 

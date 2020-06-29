@@ -43,3 +43,7 @@ html, body {
 .list-group-item:hover {
   background-color: lightgray;
 }
+
+.file-item {
+  padding:0px 0px 0px 0px;
+}

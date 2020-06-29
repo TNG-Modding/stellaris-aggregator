@@ -3,14 +3,6 @@ import EventList from "./eventList"
 import EventInfo from "./EventInfo/eventInfo"
 
 class EventBrowser extends Component {    
-
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         selectedEvent: this.props.events[0]
-    //     }
-    // }
-
     render() {
         return (
             <div className="event-handler">  
@@ -19,6 +11,7 @@ class EventBrowser extends Component {
             </div>
         );
     }    
+    
 }
 
 export default EventBrowser;

@@ -1,3 +1,4 @@
+const {PythonShell} = require('python-shell');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -18,7 +19,21 @@ function createWindow() {
   mainWindow.webContents.openDevTools();
 }
 
-app.on('ready', createWindow);
+function startPythonServer() {
+  var serverMainFilepath = path.join(__dirname, '/../backend/main.py');
+  // var subpy = require('child_process').spawn('python', [serverMainFilepath]);
+  PythonShell.run(serverMainFilepath,  function  (err, results)  {
+    if (err) {
+      console.log(err);
+      return;
+    }
+  }); 
+}
+
+app.on('ready', function(){
+  // startPythonServer();
+  createWindow();  
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

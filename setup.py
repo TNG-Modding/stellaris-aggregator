@@ -9,10 +9,7 @@ setup(
     url = "",
     packages=find_packages(),
     install_requires=["click", "ensure", "luaparser", "PyYAML", "lark-parser"],
-    entry_points = {
-        "console_scripts": ["stellarisfiles=stellarisfiles.cli:cli"]
-    },
-    include_package_data=True,
+    script=["backend/main.py"]
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",

@@ -3,16 +3,19 @@ import React, {Component} from 'react';
 class FileItem extends Component {
     render() {  
         return (
-            <button key={this.props.filename} 
+            <button key={this.props.filepath} 
                     type="button" 
-                    onClick={() => this.onFileClick(this.props.filename)} 
-                    className="list-group-item text-left">
-                {this.props.filename}
+                    onClick={() => this.onFileClick(this.props.filepath)} 
+                    className="list-group-item text-left file-item">
+                {this.filterFilename(this.props.filepath)}
             </button>
         );
     }
-    onFileClick = (filename) => {
-        this.props.openFileFn(filename);
+    filterFilename = (filepath) => {
+        return filepath.replace(/^.*[\\\/]/, '');
+    }
+    onFileClick = (filepath) => {
+        this.props.openFileFn(filepath);
     }
 }
 
