@@ -8,18 +8,19 @@ from pprint import pprint
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/parse/<path:eventFilepath>", methods=['POST'])
-def parse(eventFilepath):
+@app.route("/parse", methods=['POST'])
+def parse():
     """Parse a file"""
-    parsedFile = LoadStellarisFile(eventFilepath)
-    print(parsedFile)
+    pprint(request.json["directorypath"])
+    directorypath = request.json["directorypath"]
+    parsedFile = LoadStellarisFile(directorypath)
     return parsedFile
 
 @app.route("/files", methods=['POST'])
 def files():
     """Print the event filenames."""
     pprint(request.json["directorypath"])
-    directorypath = "/Volumes/Storage/stellaris-defines/events"
+    directorypath = request.json["directorypath"]
     filepaths = GetFilenamesInFolder(directorypath)
     return jsonify({"filepaths":filepaths})
 

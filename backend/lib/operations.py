@@ -5,6 +5,7 @@ import yaml
 import json
 from pprint import pprint
 
+from . import eventSerializer as serializer
 from . import larkParser as parser
 
 def GetFilenamesInFolder(directoryPath):
@@ -37,7 +38,8 @@ def GetLocalizationContentsFromFile(localizationFilepath):
             print(exc)
 
 def LoadStellarisFile(filepath):
-    return parser.ParseEventFile(filepath)
+    parsedObject = parser.ParseEventFile(filepath)
+    return serializer.ConvertParsedObjectToXml(parsedObject)
 
 def ReadConversationsInFolder (directoryPath):
     conversationsPattern = os.path.join(directoryPath,"*.json")
