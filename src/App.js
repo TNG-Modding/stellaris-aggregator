@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+import './dark.css';
 
 import ConversationPanel from "./components/conversationPanel"
 

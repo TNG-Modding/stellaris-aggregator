@@ -1,0 +1,22 @@
+#root {
+  background-color: #262626;
+  color: #f0f0f0;
+}
+
+.list-group-item {
+  background-color: #303030;
+  color: #f0f0f0;
+}
+.list-group-item:hover {
+  background-color: #424242;
+}
+
+.form-control {
+  background-color: #303030;
+  border: 1px solid #141414;
+}
+
+.form-control:focus {
+  border: 1px solid #141414;
+  background-color: #424242;
+}
