@@ -50,6 +50,8 @@ class EventTransformer(Transformer):
         return eventFile
     def POSS_SYMB(self, args):
         return args[0]
+    def LOGIC_WORD(self, args):
+        return args[0]
 
 def ParseEventFile(eventFilepath):
     eventLarkFilepath = os.path.join(Path(os.path.realpath(__file__)).parent, "events.lark")
