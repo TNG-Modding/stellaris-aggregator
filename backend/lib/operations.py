@@ -39,7 +39,8 @@ def GetLocalizationContentsFromFile(localizationFilepath):
 
 def LoadStellarisFile(filepath):
     parsedObject = parser.ParseEventFile(filepath)
-    return serializer.ConvertParsedToJson(parsedObject)
+    filename = os.path.splitext(os.path.basename(filepath))[0]
+    return serializer.ConvertParsedToJson(parsedObject, filename)
 
 def ReadConversationsInFolder (directoryPath):
     conversationsPattern = os.path.join(directoryPath,"*.json")

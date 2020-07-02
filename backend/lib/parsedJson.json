@@ -1,0 +1,1260 @@
+{
+    "galactic_community_events": {
+        "events": [
+            {
+                "ids": [
+                    "galcom.1"
+                ],
+                "hide_window": "yes",
+                "is_triggered_only": "yes",
+                "triggers": [
+                    {
+                        "NORS": [
+                            {
+                                "has_global_flag": [
+                                    "galactic_community_founded",
+                                    "galcom_founding_begun"
+                                ]
+                            }
+                        ],
+                        "count_country": {
+                            "limits": [
+                                {
+                                    "is_country_type": "default",
+                                    "is_homicidal": "no"
+                                }
+                            ],
+                            "count": "3"
+                        },
+                        "any_playable_country": {
+                            "perc_communications_with_playable": "0.7",
+                            "is_homicidal": "no",
+                            "is_gestalt": "no"
+                        }
+                    }
+                ],
+                "immediate": [
+                    {
+                        "set_global_flags": [
+                            "galcom_founding_begun"
+                        ],
+                        "random_playable_country": {
+                            "limits": [
+                                {
+                                    "perc_communications_with_playable": "0.7",
+                                    "is_homicidal": "no",
+                                    "is_gestalt": "no"
+                                }
+                            ],
+                            "country_events": [
+                                {
+                                    "ids": [
+                                        "galcom.2"
+                                    ]
+                                }
+                            ],
+                            "every_playable_country": {
+                                "limits": [
+                                    {
+                                        "NOTS": [
+                                            {
+                                                "is_same_value": "prev"
+                                            }
+                                        ],
+                                        "has_communications": "prev",
+                                        "is_homicidal": "no"
+                                    }
+                                ],
+                                "country_events": [
+                                    {
+                                        "ids": [
+                                            "galcom.2"
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        "random_country": {
+                            "limits": [
+                                {
+                                    "is_country_type": "global_event"
+                                }
+                            ],
+                            "country_events": [
+                                {
+                                    "ids": [
+                                        "galcom.3"
+                                    ],
+                                    "days": "360"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.14"
+                ],
+                "hide_window": "yes",
+                "is_triggered_only": "yes",
+                "triggers": [
+                    {
+                        "any_playable_country": {
+                            "is_galactic_community_member": "no",
+                            "NOTS": [
+                                {
+                                    "has_country_flags": [
+                                        "galcom_form_nay"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "immediate": [
+                    {
+                        "every_playable_country": {
+                            "limits": [
+                                {
+                                    "is_galactic_community_member": "no",
+                                    "NOTS": [
+                                        {
+                                            "has_country_flags": [
+                                                "galcom_form_nay"
+                                            ]
+                                        }
+                                    ],
+                                    "any_playable_country": {
+                                        "has_communications": "prev",
+                                        "is_galactic_community_member": "yes"
+                                    }
+                                }
+                            ],
+                            "country_events": [
+                                {
+                                    "ids": [
+                                        "galcom.16"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ],
+        "country_events": [
+            {
+                "ids": [
+                    "galcom.2"
+                ],
+                "titles": [
+                    "galcom.2.name"
+                ],
+                "descriptions": [
+                    {
+                        "triggers": [
+                            {
+                                "NOTS": [
+                                    {
+                                        "has_global_flag": "galcom_form_failed"
+                                    }
+                                ]
+                            }
+                        ],
+                        "text": "galcom.2a.desc"
+                    },
+                    {
+                        "triggers": [
+                            {
+                                "has_global_flag": "galcom_form_failed"
+                            }
+                        ],
+                        "text": "galcom.2b.desc"
+                    }
+                ],
+                "pictures": [
+                    "GFX_evt_galactic_community"
+                ],
+                "show_sounds": [
+                    "event_vote"
+                ],
+                "is_triggered_only": "yes",
+                "options": [
+                    {
+                        "names": [
+                            "galcom.2.a"
+                        ],
+                        "custom_tooltips": [
+                            "galcom_2_aye"
+                        ],
+                        "hidden_effect": {
+                            "set_country_flag": "galcom_form_aye"
+                        },
+                        "ai_chance": {
+                            "factors": [
+                                "15"
+                            ],
+                            "modifiers": [
+                                {
+                                    "factors": [
+                                        "3"
+                                    ],
+                                    "has_ethic": "ethic_xenophile"
+                                },
+                                {
+                                    "factors": [
+                                        "10"
+                                    ],
+                                    "has_ethic": "ethic_fanatic_xenophile"
+                                },
+                                {
+                                    "factors": [
+                                        "10"
+                                    ],
+                                    "ORS": [
+                                        {
+                                            "has_civics": [
+                                                "civic_diplomatic_corps",
+                                                "civic_public_relations_specialists",
+                                                "civic_hive_empath",
+                                                "civic_machine_servitor"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "names": [
+                            "galcom.2.b"
+                        ],
+                        "custom_tooltips": [
+                            "galcom_2_nay"
+                        ],
+                        "hidden_effect": {
+                            "set_country_flag": "galcom_form_nay"
+                        },
+                        "ai_chance": {
+                            "factors": [
+                                "5"
+                            ],
+                            "modifiers": [
+                                {
+                                    "factors": [
+                                        "3"
+                                    ],
+                                    "has_ethic": "ethic_xenophobe"
+                                },
+                                {
+                                    "factors": [
+                                        "10"
+                                    ],
+                                    "has_ethic": "ethic_fanatic_xenophobe"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.3"
+                ],
+                "hide_window": "yes",
+                "is_triggered_only": "yes",
+                "immediate": [
+                    {
+                        "ifs": [
+                            {
+                                "limits": [
+                                    {
+                                        "count_country": {
+                                            "limits": [
+                                                {
+                                                    "is_country_type": "default",
+                                                    "has_country_flags": [
+                                                        "galcom_form_aye"
+                                                    ]
+                                                }
+                                            ],
+                                            "count": "3"
+                                        }
+                                    }
+                                ],
+                                "every_country": [
+                                    {
+                                        "limits": [
+                                            {
+                                                "is_country_type": "default",
+                                                "has_country_flags": [
+                                                    "galcom_form_aye"
+                                                ]
+                                            }
+                                        ],
+                                        "add_to_galactic_community": "yes",
+                                        "country_events": [
+                                            {
+                                                "ids": [
+                                                    "galcom.5"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "limits": [
+                                            {
+                                                "is_country_type": "default",
+                                                "has_country_flags": [
+                                                    "galcom_form_nay"
+                                                ]
+                                            }
+                                        ],
+                                        "country_events": [
+                                            {
+                                                "ids": [
+                                                    "galcom.6"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "random_country": {
+                                    "limits": [
+                                        {
+                                            "is_country_type": "global_event"
+                                        }
+                                    ],
+                                    "country_events": [
+                                        {
+                                            "ids": [
+                                                "galcom.15"
+                                            ],
+                                            "days": "20"
+                                        }
+                                    ]
+                                },
+                                "set_global_flags": [
+                                    "galactic_community_founded"
+                                ]
+                            }
+                        ],
+                        "else": {
+                            "ifs": [
+                                {
+                                    "limits": [
+                                        {
+                                            "NOTS": [
+                                                {
+                                                    "has_global_flag": "galcom_form_failed"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "set_global_flags": [
+                                        "galcom_form_failed"
+                                    ]
+                                }
+                            ],
+                            "every_country": {
+                                "limits": [
+                                    {
+                                        "is_country_type": "default",
+                                        "ORS": [
+                                            {
+                                                "has_country_flags": [
+                                                    "galcom_form_aye",
+                                                    "galcom_form_nay"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "country_events": [
+                                    {
+                                        "ids": [
+                                            "galcom.10"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "random_country": {
+                                "limits": [
+                                    {
+                                        "is_country_type": "global_event"
+                                    }
+                                ],
+                                "country_events": [
+                                    {
+                                        "ids": [
+                                            "galcom.20"
+                                        ],
+                                        "days": "18000"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.5"
+                ],
+                "titles": [
+                    "galcom.5.name"
+                ],
+                "descriptions": [
+                    "galcom.5.desc"
+                ],
+                "pictures": [
+                    "GFX_evt_galactic_community"
+                ],
+                "show_sounds": [
+                    "event_galactic_community"
+                ],
+                "is_triggered_only": "yes",
+                "options": [
+                    {
+                        "names": [
+                            "galcom.5.a"
+                        ],
+                        "hidden_effect": {
+                            "set_country_flag": "league_of_nations_achievement"
+                        }
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.6"
+                ],
+                "titles": [
+                    "galcom.5.name"
+                ],
+                "descriptions": [
+                    "galcom.6.desc"
+                ],
+                "pictures": [
+                    "GFX_evt_galactic_community"
+                ],
+                "show_sounds": [
+                    "event_galactic_community"
+                ],
+                "is_triggered_only": "yes",
+                "options": [
+                    {
+                        "names": [
+                            "galcom.6.a"
+                        ],
+                        "hidden_effect": {
+                            "set_country_flag": "whatever_it_is_im_against_it_rejected_community"
+                        }
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.10"
+                ],
+                "titles": [
+                    "galcom.10.name"
+                ],
+                "descriptions": [
+                    "galcom.10.desc"
+                ],
+                "pictures": [
+                    "GFX_evt_civil_action"
+                ],
+                "show_sounds": [
+                    "event_assembly_fight"
+                ],
+                "is_triggered_only": "yes",
+                "options": [
+                    {
+                        "names": [
+                            "galcom.10.a"
+                        ],
+                        "triggers": [
+                            {
+                                "has_country_flags": [
+                                    "galcom_form_aye"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "names": [
+                            "galcom.10.b"
+                        ],
+                        "triggers": [
+                            {
+                                "has_country_flags": [
+                                    "galcom_form_nay"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.15"
+                ],
+                "hide_window": "yes",
+                "is_triggered_only": "yes",
+                "triggers": [
+                    {
+                        "any_playable_country": {
+                            "is_galactic_community_member": "no",
+                            "NOTS": [
+                                {
+                                    "has_country_flags": [
+                                        "galcom_form_nay"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "immediate": [
+                    {
+                        "every_playable_country": {
+                            "limits": [
+                                {
+                                    "is_galactic_community_member": "no",
+                                    "NOTS": [
+                                        {
+                                            "has_country_flags": [
+                                                "galcom_form_nay"
+                                            ]
+                                        }
+                                    ],
+                                    "any_playable_country": {
+                                        "has_communications": "prev",
+                                        "is_galactic_community_member": "yes"
+                                    }
+                                }
+                            ],
+                            "country_events": [
+                                {
+                                    "ids": [
+                                        "galcom.16"
+                                    ]
+                                }
+                            ]
+                        },
+                        "country_events": [
+                            {
+                                "ids": [
+                                    "galcom.15"
+                                ],
+                                "days": "90"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.16"
+                ],
+                "titles": [
+                    "galcom.5.name"
+                ],
+                "descriptions": [
+                    "galcom.16.desc"
+                ],
+                "pictures": [
+                    "GFX_evt_galactic_community"
+                ],
+                "show_sounds": [
+                    "event_galactic_community"
+                ],
+                "is_triggered_only": "yes",
+                "triggers": [
+                    {
+                        "is_galactic_community_member": "no",
+                        "NOTS": [
+                            {
+                                "has_country_flags": [
+                                    "galcom_form_nay"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "immediate": [
+                    {
+                        "ifs": [
+                            {
+                                "limits": [
+                                    {
+                                        "is_homicidal": "yes"
+                                    }
+                                ],
+                                "set_country_flag": "galcom_form_nay"
+                            }
+                        ]
+                    }
+                ],
+                "options": [
+                    {
+                        "names": [
+                            "galcom.16.a"
+                        ],
+                        "allow": {
+                            "is_homicidal": "no"
+                        },
+                        "add_to_galactic_community": "yes",
+                        "ai_chance": {
+                            "factors": [
+                                "15"
+                            ],
+                            "modifiers": [
+                                {
+                                    "factors": [
+                                        "3"
+                                    ],
+                                    "has_ethic": "ethic_xenophile"
+                                },
+                                {
+                                    "factors": [
+                                        "10"
+                                    ],
+                                    "has_ethic": "ethic_fanatic_xenophile"
+                                },
+                                {
+                                    "factors": [
+                                        "10"
+                                    ],
+                                    "ORS": [
+                                        {
+                                            "has_civics": [
+                                                "civic_diplomatic_corps",
+                                                "civic_public_relations_specialists",
+                                                "civic_hive_empath",
+                                                "civic_machine_servitor"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "names": [
+                            "galcom.16.b"
+                        ],
+                        "triggers": [
+                            {
+                                "is_homicidal": "no"
+                            }
+                        ],
+                        "hidden_effect": {
+                            "set_country_flag": "galcom_form_nay"
+                        },
+                        "ai_chance": {
+                            "factors": [
+                                "5"
+                            ],
+                            "modifiers": [
+                                {
+                                    "factors": [
+                                        "3"
+                                    ],
+                                    "has_ethic": "ethic_xenophobe"
+                                },
+                                {
+                                    "factors": [
+                                        "10"
+                                    ],
+                                    "has_ethic": "ethic_fanatic_xenophobe"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "names": [
+                            "SCUM"
+                        ],
+                        "triggers": [
+                            {
+                                "has_civics": [
+                                    "civic_fanatic_purifiers"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "names": [
+                            "anomaly.3089.b"
+                        ],
+                        "triggers": [
+                            {
+                                "has_civics": [
+                                    "civic_machine_terminator"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "names": [
+                            "anomaly.180.e"
+                        ],
+                        "triggers": [
+                            {
+                                "has_civics": [
+                                    "civic_hive_devouring_swarm"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.20"
+                ],
+                "hide_window": "yes",
+                "is_triggered_only": "yes",
+                "triggers": [
+                    {
+                        "NOTS": [
+                            {
+                                "has_global_flag": "galactic_community_founded"
+                            }
+                        ]
+                    }
+                ],
+                "immediate": [
+                    {
+                        "ifs": [
+                            {
+                                "limits": [
+                                    {
+                                        "count_country": {
+                                            "limits": [
+                                                {
+                                                    "is_country_type": "default",
+                                                    "is_homicidal": "no"
+                                                }
+                                            ],
+                                            "count": "3"
+                                        },
+                                        "any_playable_country": {
+                                            "perc_communications_with_playable": "0.5",
+                                            "is_homicidal": "no",
+                                            "is_gestalt": "no"
+                                        }
+                                    }
+                                ],
+                                "every_country": {
+                                    "country_flag_removes": [
+                                        "galcom_form_aye",
+                                        "galcom_form_nay"
+                                    ]
+                                },
+                                "random_playable_country": {
+                                    "limits": [
+                                        {
+                                            "perc_communications_with_playable": "0.5",
+                                            "is_homicidal": "no",
+                                            "is_gestalt": "no"
+                                        }
+                                    ],
+                                    "country_events": [
+                                        {
+                                            "ids": [
+                                                "galcom.2"
+                                            ]
+                                        }
+                                    ],
+                                    "every_playable_country": {
+                                        "limits": [
+                                            {
+                                                "has_communications": "prev",
+                                                "is_homicidal": "no"
+                                            }
+                                        ],
+                                        "country_events": [
+                                            {
+                                                "ids": [
+                                                    "galcom.2"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                "random_country": {
+                                    "limits": [
+                                        {
+                                            "is_country_type": "global_event"
+                                        }
+                                    ],
+                                    "country_events": [
+                                        {
+                                            "ids": [
+                                                "galcom.3"
+                                            ],
+                                            "days": "360"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "else": {
+                            "random_country": {
+                                "limits": [
+                                    {
+                                        "is_country_type": "global_event"
+                                    }
+                                ],
+                                "country_events": [
+                                    {
+                                        "ids": [
+                                            "galcom.20"
+                                        ],
+                                        "days": "18000"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.50"
+                ],
+                "hide_window": "yes",
+                "is_triggered_only": "yes",
+                "triggers": [
+                    {
+                        "NOTS": [
+                            {
+                                "has_global_flag": "first_council_formed"
+                            }
+                        ]
+                    }
+                ],
+                "immediate": [
+                    {
+                        "set_global_flags": [
+                            "first_council_formed"
+                        ],
+                        "every_playable_country": {
+                            "limits": [
+                                {
+                                    "is_ai": "no"
+                                }
+                            ],
+                            "country_events": [
+                                {
+                                    "ids": [
+                                        "galcom.51"
+                                    ],
+                                    "days": "5"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.51"
+                ],
+                "titles": [
+                    "galcom.51.name"
+                ],
+                "descriptions": [
+                    "galcom.51.desc"
+                ],
+                "pictures": [
+                    "GFX_evt_partition"
+                ],
+                "show_sounds": [
+                    "event_vote"
+                ],
+                "is_triggered_only": "yes",
+                "immediate": [
+                    {
+                        "random_playable_country": [
+                            {
+                                "limits": [
+                                    {
+                                        "is_galactic_community_member": "yes",
+                                        "is_part_of_galactic_council": "yes"
+                                    }
+                                ],
+                                "save_event_target_as": "council_member_1"
+                            },
+                            {
+                                "limits": [
+                                    {
+                                        "is_galactic_community_member": "yes",
+                                        "is_part_of_galactic_council": "yes",
+                                        "NOTS": [
+                                            {
+                                                "is_same_value": "event_target:council_member_1"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "save_event_target_as": "council_member_2"
+                            },
+                            {
+                                "limits": [
+                                    {
+                                        "is_galactic_community_member": "yes",
+                                        "is_part_of_galactic_council": "yes",
+                                        "NORS": [
+                                            {
+                                                "is_same_value": [
+                                                    "event_target:council_member_1",
+                                                    "event_target:council_member_2"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "save_event_target_as": "council_member_3"
+                            }
+                        ]
+                    }
+                ],
+                "options": [
+                    {
+                        "names": [
+                            "galcom.51.a"
+                        ],
+                        "triggers": [
+                            {
+                                "is_part_of_galactic_council": "no"
+                            }
+                        ]
+                    },
+                    {
+                        "names": [
+                            "galcom.51.b"
+                        ],
+                        "triggers": [
+                            {
+                                "is_part_of_galactic_council": "yes"
+                            }
+                        ]
+                    },
+                    {
+                        "names": [
+                            "galcom.51.c"
+                        ],
+                        "triggers": [
+                            {
+                                "is_galactic_community_member": "no"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.60"
+                ],
+                "hide_window": "yes",
+                "is_triggered_only": "yes",
+                "immediate": [
+                    {
+                        "every_country": {
+                            "limits": [
+                                {
+                                    "is_galactic_community_member": "yes",
+                                    "NOTS": [
+                                        {
+                                            "is_same_value": "root"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "add_opinion_modifier": {
+                                "who": "root",
+                                "modifiers": [
+                                    "opinion_fellow_galcom_member"
+                                ]
+                            },
+                            "root": {
+                                "add_opinion_modifier": {
+                                    "who": "prev",
+                                    "modifiers": [
+                                        "opinion_fellow_galcom_member"
+                                    ]
+                                }
+                            }
+                        },
+                        "ifs": [
+                            {
+                                "limits": [
+                                    {
+                                        "NOTS": [
+                                            {
+                                                "has_country_flags": [
+                                                    "has_market_access"
+                                                ]
+                                            }
+                                        ],
+                                        "any_country": {
+                                            "is_galactic_community_member": "yes",
+                                            "has_country_flags": [
+                                                "has_market_access"
+                                            ]
+                                        }
+                                    }
+                                ],
+                                "country_events": [
+                                    {
+                                        "ids": [
+                                            "action.115"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.61"
+                ],
+                "hide_window": "yes",
+                "is_triggered_only": "yes",
+                "immediate": [
+                    {
+                        "set_country_flag": "galcom_form_nay",
+                        "every_country": {
+                            "limits": [
+                                {
+                                    "has_opinion_modifier": {
+                                        "who": "root",
+                                        "modifiers": [
+                                            "opinion_fellow_galcom_member"
+                                        ]
+                                    }
+                                }
+                            ],
+                            "remove_opinion_modifier": {
+                                "who": "root",
+                                "modifiers": [
+                                    "opinion_fellow_galcom_member"
+                                ]
+                            },
+                            "root": {
+                                "remove_opinion_modifier": {
+                                    "who": "prev",
+                                    "modifiers": [
+                                        "opinion_fellow_galcom_member"
+                                    ]
+                                }
+                            }
+                        },
+                        "ifs": [
+                            {
+                                "limits": [
+                                    {
+                                        "NOTS": [
+                                            {
+                                                "any_owned_planet": {
+                                                    "is_same_value": "event_target:market_founder_planet"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "country_flag_removes": [
+                                    "has_market_access"
+                                ],
+                                "enable_galactic_market": "no"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.62"
+                ],
+                "titles": [
+                    "galcom.62.name"
+                ],
+                "descriptions": [
+                    "galcom.62.desc"
+                ],
+                "pictures": [
+                    "GFX_evt_financial_instruments"
+                ],
+                "show_sounds": [
+                    "event_galactic_market"
+                ],
+                "location": "event_target:market_founder_planet",
+                "is_triggered_only": "yes",
+                "triggers": [
+                    {
+                        "any_owned_planet": {
+                            "is_same_value": "event_target:market_founder_planet"
+                        }
+                    }
+                ],
+                "immediate": [
+                    {
+                        "country_flag_removes": [
+                            "has_market_access"
+                        ],
+                        "enable_galactic_market": "no",
+                        "event_target:galactic_market_station": {
+                            "destroy_ambient_object": "this",
+                            "solar_system": {
+                                "save_event_target_as": "galactic_market_station_system"
+                            }
+                        },
+                        "remove_global_flag": "galactic_market_founded",
+                        "set_global_flags": [
+                            "ongoing_market_nomination"
+                        ],
+                        "event_target:global_event_country": {
+                            "country_events": [
+                                {
+                                    "ids": [
+                                        "action.98"
+                                    ],
+                                    "days": "1800"
+                                }
+                            ]
+                        },
+                        "every_playable_country": {
+                            "limits": [
+                                {
+                                    "has_country_flags": [
+                                        "has_market_access"
+                                    ]
+                                }
+                            ],
+                            "country_flag_removes": [
+                                "has_market_access"
+                            ],
+                            "enable_galactic_market": "no",
+                            "ifs": [
+                                {
+                                    "limits": [
+                                        {
+                                            "is_galactic_community_member": "yes",
+                                            "NOTS": [
+                                                {
+                                                    "is_same_value": "root"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "country_events": [
+                                        {
+                                            "ids": [
+                                                "galcom.63"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "options": [
+                    {
+                        "names": [
+                            "galcom.62.A"
+                        ],
+                        "remove_modifier": "galactic_market_founder"
+                    }
+                ]
+            },
+            {
+                "ids": [
+                    "galcom.63"
+                ],
+                "titles": [
+                    "galcom.63.name"
+                ],
+                "descriptions": [
+                    "galcom.63.desc"
+                ],
+                "pictures": [
+                    "GFX_evt_financial_instruments"
+                ],
+                "show_sounds": [
+                    "event_galactic_market"
+                ],
+                "is_triggered_only": "yes",
+                "immediate": [
+                    {
+                        "set_country_flag": "market_nomination_eligible",
+                        "begin_event_chain": [
+                            {
+                                "begin_event_chains": [
+                                    "market_founding_chain"
+                                ],
+                                "target": "this"
+                            }
+                        ]
+                    }
+                ],
+                "after": {
+                    "tooltip": {
+                        "begin_event_chain": [
+                            {
+                                "begin_event_chains": [
+                                    "market_founding_chain"
+                                ],
+                                "target": "this"
+                            }
+                        ]
+                    }
+                },
+                "options": [
+                    {
+                        "names": [
+                            "galcom.63.A"
+                        ],
+                        "triggers": [
+                            {
+                                "has_authorities": [
+                                    "auth_corporate"
+                                ]
+                            }
+                        ],
+                        "custom_tooltips": [
+                            "enable_decision_market_nomination"
+                        ]
+                    },
+                    {
+                        "names": [
+                            "galcom.63.B"
+                        ],
+                        "triggers": [
+                            {
+                                "NOTS": [
+                                    {
+                                        "has_authorities": [
+                                            "auth_corporate"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "custom_tooltips": [
+                            "enable_decision_market_nomination"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

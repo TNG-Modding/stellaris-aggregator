@@ -1,6 +1,7 @@
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from xml.dom import minidom
 from pprint import pprint
+import json
 
 def HandleXmlChildren(parentElement, child):
     if isinstance(child, list):
@@ -20,10 +21,11 @@ def ConvertParsedObjectToXml (parsed):
 
 
 manyKeys = {
-    "country_event": "events",
-    "ship_event": "events",
-    "fleet_event": "events",
-    "planet_event": "events",
+    "country_event": "events",#"country_events",
+    "ship_event": "events",#"ship_events",
+    "fleet_event": "events",#"fleet_events",
+    "planet_event": "events",#"planet_events",
+    "event": "events",
     "option": "options",
     "custom_tooltip": "custom_tooltips",
     "trigger": "triggers",
@@ -43,6 +45,7 @@ manyKeys = {
     "NOT": "NOTS",
     "OR": "ORS",
     "AND": "ANDS",
+    "NOR": "NORS",
     "remove_country_flag": "country_flag_removes",
     "has_country_flag": "has_country_flags",
     "set_global_flag": "set_global_flags",
@@ -55,74 +58,57 @@ manyKeys = {
 duplicate_keys = []
 
 def AssignValueToJson(parent, key, child, seperator):
-    # if key in manyKeys:
-    #     key = manyKeys
+    if key in manyKeys:
+        key = manyKeys[key]
 
-    # if key in parent:
-    #     newlist = [parent[key], child]
-    #     parent[key] = newlist
-    # else:
-    print(seperator, "Assiging ", child, " to ", key, " of ", parent)
-    print(seperator, "---*")
-    parent[key] = child
+        if key in parent:
+            parent[key].append(child)
+        else:
+            parent[key] = [child]
+    else:
+        if key in parent:
+            if isinstance(parent[key], list):
+                parent[key].append(child)
+            else:
+                newlist = [parent[key], child]
+                parent[key] = newlist
+        else:
+            parent[key] = child
 
 indentor = "    "
 
-def HandleJsonChildren (parent, key, child, level):
+def AssignObjectFromList(parent, objectName, children, level):
     seperator = indentor * level
-    print(seperator, "Begin")
-    print(seperator, parent)
-    print(seperator, key)
-    print(seperator, child)
-    print(seperator,"-----")
-    if isinstance(child, list):
-        print(seperator, "Creating new item to handle list of child")
-        print(seperator, "--")
-        newItem = {}
-        i = 0
-        for grandchild in child:
-            print(seperator, "Adding grandchild to parent", parent)
-            print(seperator, "Attempting to add child", grandchild)
-            print(seperator, "-")
-            if isinstance(child[1], tuple):
-                HandleJsonChildren(newItem, grandchild[0][0], grandchild[1], level+1)
-            else:
-                HandleJsonChildren(newItem, grandchild[0], grandchild[1], level+1) 
-            i = i+1
-        AssignValueToJson(parent, key, newItem, seperator) 
-    elif isinstance(child, tuple):
-        # newItem = {}
-        # HandleJsonChildren(newItem, child[0], child[1])
-        # AssignValueToJson(parent, key, newItem)
-        
-        if isinstance(child[1], list):
-            print(seperator, "Adding complex tuple to parent", parent)
-            print(seperator, "Adding key %s" % child[0])
-            print(seperator, "Attempting to add list child", child[1])
-            print(seperator, "-")
-            HandleJsonChildren(parent, child[0], child[1], level+1)
-        if isinstance(child[1], tuple):
-            print(seperator, "Adding complex tuple to parent", parent)
-            print(seperator, "Adding key %s" % child[0])
-            print(seperator, "Attempting to add tuple child", child[1])
-            print(seperator, "-")
-            newItem = {}
-            HandleJsonChildren(newItem, child[1][0], child[1][1], level+1)
-            AssignValueToJson(parent, key, newItem, seperator)
-        else:
-            print(seperator, "Adding simple tuple to parent", parent)
-            print(seperator, "Adding key %s" % child[0])
-            print(seperator, "Attempting to add child", child[1])
-            print(seperator, "-")
-            newItem = {}
-            AssignValueToJson(parent, child[0], child[1], seperator)
-    else:
-        print(seperator, "Assigning child", child, " to ", key, " of ", parent)
-        print(seperator, "$$$")
-        AssignValueToJson(parent, key, child, seperator)
+    # print(seperator, "Creating new item to handle item children")
+    # print(seperator, "--")
+    listItem = {}
+    for child in children:
+        # print(seperator, "Adding child to parent", parent)
+        # print(seperator, "Attempting to add child", child)
+        AssignTupleToItem(listItem, child, level+1)
+    AssignValueToJson(parent, objectName, listItem, seperator) 
 
-def ConvertParsedToJson (parsed):
+def AssignTupleToItem(parent, pair, level):
+    seperator = indentor * level
+    if isinstance(pair[1], tuple):
+        newObject = {}
+        AssignTupleToItem(newObject, pair[1], level+1)
+        AssignValueToJson(parent, pair[0], newObject, seperator)
+    elif isinstance(pair[1], list):
+        objectName = pair[0]
+        children = pair[1]
+        AssignObjectFromList(parent, objectName, children, level+1)
+    else:
+        AssignValueToJson(parent, pair[0], pair[1], seperator)
+
+def ConvertParsedToJson (parsed, filenameNoExtension):
+    # pprint(parsed)
     validJson = {}
-    HandleJsonChildren(validJson, "file", parsed["events"], 0)
-    pprint(validJson)
+    try:
+        AssignObjectFromList(validJson, filenameNoExtension, parsed["events"], 0)
+    except Exception:
+        import traceback
+        traceback.print_exc(limit=2)
+    
+    print(json.dumps(validJson))
     return parsed
