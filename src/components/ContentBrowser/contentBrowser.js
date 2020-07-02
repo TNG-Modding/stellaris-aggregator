@@ -24,14 +24,12 @@ class ContentBrowser extends Component {
 
     async componentDidMount() {
         const filepaths = await eventClient.getFiles("/Volumes/Storage/stellaris-defines/events");
-        console.log(filepaths["filepaths"])
         this.updateFilepaths(filepaths["filepaths"])
     }
 
-    openFileName = (filename) => {
-        console.log(filename);
-        const parsedFile = eventClient.parseEventFile(filename);
-        console.log(parsedFile);
+    openFileName = async (filename) => {
+        const parsedFile = await eventClient.parseEventFile(filename);
+        console.log(parsedFile)
         this.setState({events: [{ name: "First event", description: "description!", options: [{name:"options.a"}]}]})
     }
     

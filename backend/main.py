@@ -14,7 +14,7 @@ def parse():
     pprint(request.json["directorypath"])
     directorypath = request.json["directorypath"]
     parsedFile = LoadStellarisFile(directorypath)
-    return ""
+    return jsonify(parsedFile)
 
 @app.route("/files", methods=['POST'])
 def files():

@@ -110,5 +110,4 @@ def ConvertParsedToJson (parsed, filenameNoExtension):
         import traceback
         traceback.print_exc(limit=2)
     
-    print(json.dumps(validJson))
-    return parsed
+    return validJson
