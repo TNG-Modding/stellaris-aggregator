@@ -9,7 +9,7 @@ class ContentBrowser extends Component {
     constructor() {
         super();
         this.state = {
-            events: [{ name: "First event", description: "description!", options: [{name:"options.a"}]}],
+            events: [],
             filepaths: []
         }    
 
@@ -29,8 +29,8 @@ class ContentBrowser extends Component {
 
     openFileName = async (filename) => {
         const parsedFile = await eventClient.parseEventFile(filename);
-        console.log(parsedFile)
-        this.setState({events: [{ name: "First event", description: "description!", options: [{name:"options.a"}]}]})
+        console.log(parsedFile["file"]["events"])
+        this.setState({events: parsedFile["file"]["events"]})
     }
     
     render() {

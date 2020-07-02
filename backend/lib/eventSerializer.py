@@ -105,7 +105,7 @@ def ConvertParsedToJson (parsed, filenameNoExtension):
     # pprint(parsed)
     validJson = {}
     try:
-        AssignObjectFromList(validJson, filenameNoExtension, parsed["events"], 0)
+        AssignObjectFromList(validJson, "file", parsed["events"], 0)
     except Exception:
         import traceback
         traceback.print_exc(limit=2)
