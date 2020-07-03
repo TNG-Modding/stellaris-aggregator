@@ -2,14 +2,6 @@ import React, {Component} from 'react';
 import FileItem from "./fileItem"
 
 class FileList extends Component {
-    onFileClick = (filename) => {
-        this.props.openFileFn(filename);
-    }
-
-    componentDidMount = () => {
-        
-    }
-
     render() {  
         return (
         <div className="file-list h-100">

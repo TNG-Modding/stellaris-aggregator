@@ -1,17 +1,34 @@
 import React, {Component} from 'react';
-import EventList from "./eventList"
+import EventList from "./EventList/eventList"
 import EventInfo from "./EventInfo/eventInfo"
 
 class EventBrowser extends Component {    
+    selectAnEvent = (event) => {
+        this.setState({selectedEvent: event})
+    }
+
+    constructor() {
+        super();
+        this.state = {
+            selectedEvent: null
+        }    
+    }
     render() {
+        if (this.state === null || this.state.selectedEvent === null)
+        {
+            return (
+                <div className="event-handler">  
+                    <EventList events={this.props.events} openEventFn={this.selectAnEvent}/>              
+                </div>
+            );
+        }
         return (
             <div className="event-handler">  
-                <EventList events={this.props.events} />
-                <EventInfo event={this.props.events[0]} />                
+                <EventList events={this.props.events} onSelectEvent={this.selectAnEvent}/>
+                <EventInfo event={this.state.selectedEvent} />                
             </div>
         );
     }    
-    
 }
 
 export default EventBrowser;

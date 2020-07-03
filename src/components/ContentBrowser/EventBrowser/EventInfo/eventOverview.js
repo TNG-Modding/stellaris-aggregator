@@ -4,7 +4,11 @@ import ListFields from "../listFields"
 class EventOverview extends Component {
     render() {
         if (this.props.event === undefined){
-            return null;
+            return (
+                <div>
+                    <p>Event</p>
+                </div>
+            );
         }
         return (
             <div>

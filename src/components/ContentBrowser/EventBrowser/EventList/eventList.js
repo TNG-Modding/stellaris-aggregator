@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ListFields from "./listFields"
+import EventButton from "./eventButton"
 
 class EventList extends Component {
     render() {
@@ -8,13 +8,11 @@ class EventList extends Component {
                 <p>Events</p>
                 <ul className="list-group">
                     {this.props.events.map((event, index) => 
-                        <button key={index} type="button" className="list-group-item text-left">
-                            <ListFields fields={event.ids}/>
-                        </button>
+                        <EventButton event={event} index={index} openEventFn={this.props.openEventFn}/>
                     )}            
                 </ul>
             </div>
         );
-    } 
+    }
 }
 export default EventList;
