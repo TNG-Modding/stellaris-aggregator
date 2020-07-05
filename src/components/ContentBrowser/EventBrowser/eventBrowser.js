@@ -3,15 +3,14 @@ import EventList from "./EventList/eventList"
 import EventInfo from "./EventInfo/eventInfo"
 
 class EventBrowser extends Component {    
-    selectAnEvent = event => {
-        this.setState({selectedEvent: event});
-    }
-
     constructor() {
         super();
         this.state = {
             selectedEvent: null
         }    
+    }
+    selectAnEvent = (event) => {
+        this.setState({selectedEvent: event});
     }
     render() {
         if (this.state === null || this.state.selectedEvent === null)
@@ -24,7 +23,7 @@ class EventBrowser extends Component {
         }
         return (
             <div className="event-handler">  
-                <EventList events={this.props.events} selectedEvent={this.state.selectedEvent} onSelectEvent={this.selectAnEvent}/>
+                <EventList events={this.props.events} selectedEvent={this.state.selectedEvent} openEventFn={this.selectAnEvent}/>
                 <EventInfo event={this.state.selectedEvent} />                
             </div>
         );

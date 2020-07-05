@@ -12,6 +12,6 @@ class EventButton extends Component {
                 <ListFields fields={this.props.event.ids}/>
             </button>
         );
-    } 
+    }
 }
 export default EventButton;
