@@ -28,3 +28,11 @@
   background-color: #262626;
   cursor: default;
 }
+
+.active-event-item {
+  background-color: #262626;
+}
+.active-event-item:hover {
+  background-color: #262626;
+  cursor: default;
+}

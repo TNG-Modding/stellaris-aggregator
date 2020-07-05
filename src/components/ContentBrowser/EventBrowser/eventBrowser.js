@@ -18,13 +18,13 @@ class EventBrowser extends Component {
         {
             return (
                 <div className="event-handler">  
-                    <EventList events={this.props.events} openEventFn={this.selectAnEvent}/>              
+                    <EventList events={this.props.events} selectedEvent={this.state.selectedEvent} openEventFn={this.selectAnEvent}/>              
                 </div>
             );
         }
         return (
             <div className="event-handler">  
-                <EventList events={this.props.events} onSelectEvent={this.selectAnEvent}/>
+                <EventList events={this.props.events} selectedEvent={this.state.selectedEvent} onSelectEvent={this.selectAnEvent}/>
                 <EventInfo event={this.state.selectedEvent} />                
             </div>
         );
