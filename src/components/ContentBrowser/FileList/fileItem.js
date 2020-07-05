@@ -1,14 +1,24 @@
 import React, {Component} from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class FileItem extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            classes: "list-group-item text-left file-item"
+        }    
+    }
+
     render() {  
         return (
-            <button key={this.props.filepath} 
+            <ListGroup.Item key={this.props.filepath} 
                     type="button" 
                     onClick={() => this.onFileClick(this.props.filepath)} 
-                    className="list-group-item text-left file-item">
+                    className={"list-group-item text-left file-item " + (this.props.isSelected === true ? "active-file-item" : "")}>
                 {this.filterFilename(this.props.filepath)}
-            </button>
+                {this.props.isSelected}
+            </ListGroup.Item>
         );
     }
     filterFilename = (filepath) => {

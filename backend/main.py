@@ -19,10 +19,10 @@ def parse():
     if os.path.exists(jsonOutputFilepath):
         with open(jsonOutputFilepath, 'r') as jsonOutputFile:
             parsedFile = jsonOutputFile.read()
-            return jsonify(parsedFile)
+            return parsedFile
     else:
         parsedFile = LoadStellarisFile(directorypath)
-        with open(outputFilepath, 'w') as outputFile:
+        with open(jsonOutputFilepath, 'w') as outputFile:
             json.dump(parsedContents, outputFile, indent=2) 
         return jsonify(parsedFile)    
 

@@ -11,6 +11,7 @@
     "jquery": "^3.3.1",
     "python-shell": "^2.0.1",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "request": "^2.88.2"

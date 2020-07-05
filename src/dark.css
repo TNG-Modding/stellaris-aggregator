@@ -20,3 +20,11 @@
   border: 1px solid #141414;
   background-color: #424242;
 }
+
+.active-file-item {
+  background-color: #262626;
+}
+.active-file-item:hover {
+  background-color: #262626;
+  cursor: default;
+}

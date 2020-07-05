@@ -10,7 +10,8 @@ class ContentBrowser extends Component {
         super();
         this.state = {
             events: [],
-            filepaths: []
+            filepaths: [],
+            selectedFilepath: null
         }    
 
     }
@@ -27,17 +28,17 @@ class ContentBrowser extends Component {
         this.updateFilepaths(filepaths["filepaths"])
     }
 
-    openFileName = async (filename) => {
-        const parsedFile = await eventClient.parseEventFile(filename);
+    openFileName = async (filepath) => {
+        const parsedFile = await eventClient.parseEventFile(filepath);
         console.log(parsedFile["file"]["events"])
-        this.setState({events: parsedFile["file"]["events"]})
+        this.setState({events: parsedFile["file"]["events"], selectedFilepath:filepath})
     }
     
     render() {
         return (
             <div className="row">
                 <div className="col-md-6">
-                    <FileList filepaths={this.state.filepaths} openFileFn={this.openFileName}/>
+                    <FileList filepaths={this.state.filepaths} openFileFn={this.openFileName} selectedFilepath={this.state.selectedFilepath}/>
                 </div>
                 <div className="col-md-6">
                     <EventBrowser events={this.state.events}/>
