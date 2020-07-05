@@ -3,8 +3,8 @@ import EventList from "./EventList/eventList"
 import EventInfo from "./EventInfo/eventInfo"
 
 class EventBrowser extends Component {    
-    selectAnEvent = (event) => {
-        this.setState({selectedEvent: event})
+    selectAnEvent = event => {
+        this.setState({selectedEvent: event});
     }
 
     constructor() {

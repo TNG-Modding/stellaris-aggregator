@@ -2,14 +2,6 @@ import React, {Component} from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 class FileItem extends Component {
-
-    constructor() {
-        super();
-        this.state = {
-            classes: "list-group-item text-left file-item"
-        }    
-    }
-
     render() {  
         return (
             <ListGroup.Item key={this.props.filepath} 

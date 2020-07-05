@@ -8,7 +8,7 @@ class ListFields extends Component {
         return (
             <span>
                 {this.props.fields.map((item, index) => 
-                    <span key={index.toString()}>{item} </span>
+                    <span key={index}>{item.toString()} </span>
                 )}  
             </span>
         );

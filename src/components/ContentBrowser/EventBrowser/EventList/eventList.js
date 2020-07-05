@@ -8,7 +8,12 @@ class EventList extends Component {
                 <p>Events</p>
                 <ul className="list-group">
                     {this.props.events.map((event, index) => 
-                        <EventButton key={index} event={event} index={index} selectedEvent={this.props.selectedEvent} openEventFn={this.props.openEventFn}/>
+                        <EventButton 
+                            key={index} 
+                            event={event} 
+                            index={index} 
+                            selectedEvent={this.props.selectedEvent} 
+                            openEventFn={this.props.openEventFn}/>
                     )}            
                 </ul>
             </div>

@@ -47,3 +47,17 @@ html, body {
 .file-item {
   padding:0px 0px 0px 0px;
 } */
+.list-group {
+  overflow: auto;
+}
+
+.option-list-names {
+  float: left;
+}
+
+.option-list-create {
+  float: right;
+}
+.option-list-item {
+  padding: 0px;
+}

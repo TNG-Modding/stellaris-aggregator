@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ListFields from "../listFields"
+import EventOptionItem from "./eventOptionItem"
 
 class EventOptionList extends Component {
     render() {
@@ -14,9 +14,7 @@ class EventOptionList extends Component {
                 <p>Options</p>
                 <ul className="list-group">
                     {this.props.event.options.map((option, index) => 
-                        <button key={index} type="button" className="list-group-item text-left">
-                            <ListFields fields={option.ids}/>
-                        </button>
+                        <EventOptionItem key={index} option={option}/>
                     )}            
                 </ul>
             </div>

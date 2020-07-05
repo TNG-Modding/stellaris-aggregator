@@ -5,7 +5,7 @@ class EventButton extends Component {
     render() {
         return (
             <button 
-                onClick={() => this.selectAnEvent(this.props.event)} 
+                onClick={() => this.props.openEventFn(this.props.event)} 
                 key={this.props.index.toString()} 
                 type="button" 
                 className={"list-group-item text-left " + (this.props.selectedEvent === this.props.event ? "active-event-item" : "")}>
@@ -13,9 +13,5 @@ class EventButton extends Component {
             </button>
         );
     } 
-
-    selectAnEvent = (event) => {
-        this.props.openEventFn(event)
-    }
 }
 export default EventButton;
