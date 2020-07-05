@@ -13,8 +13,18 @@ def parse():
     """Parse a file"""
     pprint(request.json["directorypath"])
     directorypath = request.json["directorypath"]
-    parsedFile = LoadStellarisFile(directorypath)
-    return jsonify(parsedFile)
+
+    filename = os.path.splitext(os.path.basename(directorypath))[0]
+    jsonOutputFilepath = os.path.dirname(directorypath) + "/" + filename + ".json"
+    if os.path.exists(jsonOutputFilepath):
+        with open(jsonOutputFilepath, 'r') as jsonOutputFile:
+            parsedFile = jsonOutputFile.read()
+            return jsonify(parsedFile)
+    else:
+        parsedFile = LoadStellarisFile(directorypath)
+        with open(outputFilepath, 'w') as outputFile:
+            json.dump(parsedContents, outputFile, indent=2) 
+        return jsonify(parsedFile)    
 
 @app.route("/files", methods=['POST'])
 def files():
@@ -23,6 +33,26 @@ def files():
     directorypath = request.json["directorypath"]
     filepaths = GetFilenamesInFolder(directorypath)
     return jsonify({"filepaths":filepaths})
+
+@app.route("/parse-all")
+def parseAll():
+    """Print the event filenames."""
+    # pprint(request.json["directorypath"])
+    # directorypath = request.json["directorypath"]
+    directorypath = "/Volumes/Storage/stellaris-defines/events"
+    filepaths = GetFilenamesInFolder(directorypath)
+    for filepath in filepaths:
+        filename = os.path.splitext(os.path.basename(filepath))[0]
+        outputFilepath = os.path.dirname(filepath) + "/" + filename + ".json"
+        if os.path.exists(outputFilepath):
+            print("Already parsed %s" % filename)
+        else:
+            print("Parsing %s " % filename)
+            parsedContents = LoadStellarisFile(filepath)
+            print("\tWriting contents to %s" % outputFilepath)  
+            with open(outputFilepath, 'w') as outputFile:
+                json.dump(parsedContents, outputFile, indent=2)      
+    return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
 @app.route("/conversations/<path:directorypath>", methods=['POST'])
 def conversations(directorypath):
