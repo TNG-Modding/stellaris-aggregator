@@ -9,9 +9,16 @@ class EventButton extends Component {
                 key={this.props.index.toString()} 
                 type="button" 
                 className={"list-group-item text-left " + (this.props.selectedEvent === this.props.event ? "active-event-item" : "")}>
-                <ListFields fields={this.props.event.ids}/>
+                <ListFields className="event-item-name" fields={this.props.event.ids}/>
+                <span className="event-item-option-count">{this.getOptionCount()}</span>
             </button>
         );
+    }
+    getOptionCount = () => {
+        if (this.props.event.options === undefined) {
+            return "";
+        }
+        return "" + this.props.event.options.length + " options";
     }
 }
 export default EventButton;

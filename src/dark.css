@@ -63,3 +63,8 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #141414; 
 }
+
+.event-item-option-count {
+  float: right;
+  color: #a0a0a0
+}
