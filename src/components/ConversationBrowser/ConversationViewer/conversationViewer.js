@@ -10,10 +10,10 @@ class ConversationViewer extends Component {
             return <p>Load a conversation.</p>
         }
         return (
-            <div>
-            <ConversationSourceList conversation={this.props.conversation}/>
-            <ConversationEditor conversation={this.props.conversation}/>
-            <DemandList conversation={this.props.conversation}/>
+            <div className="conversation-viewer">
+                <ConversationSourceList conversation={this.props.conversation}/>
+                <ConversationEditor conversation={this.props.conversation}/>
+                <DemandList conversation={this.props.conversation}/>
             </div>
         );
     }    

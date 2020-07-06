@@ -7,10 +7,11 @@ class ConversationBrowser extends Component {
         super();
         this.state = {
             conversations: [],
+            editedConversations: {},
             selectedConversation: null
         }    
-
     }
+
     updateConversations(conversations) {
         this.setState(prevState => ({
             ...prevState,
@@ -22,6 +23,9 @@ class ConversationBrowser extends Component {
         const response = await this.props.eventsClient.getConversations("/Users/oliverbarnum/galactic-conversation/conversations/");
         // console.log(response);
         this.updateConversations(response["conversations"])
+        if (response["conversations"].length >= 1) {
+            this.selectAConversation(response["conversations"][0]);
+        }
     }
 
     selectAConversation = (conversation) => {
@@ -29,6 +33,10 @@ class ConversationBrowser extends Component {
             ...prevState,
             selectedConversation: conversation
         }));
+    }
+
+    updateAConversation = (conversationWithEdits) => {
+
     }
 
     render(){

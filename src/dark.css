@@ -28,7 +28,7 @@
 }
 
 .active-file-item:hover, .active-event-item:hover, .active-conversation-item:hover {
-  background-color: #262626;
+  background-color: #292929;
   cursor: default;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .active-file-item, .active-event-item, .active-conversation-item {
-  background-color: #262626;
+  background-color: #292929;
 }
 
 .add-demand-btn {
