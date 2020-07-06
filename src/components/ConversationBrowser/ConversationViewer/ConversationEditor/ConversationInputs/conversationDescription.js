@@ -8,9 +8,8 @@ class ConversationDescription extends Component {
                     type="text" 
                     className="form-control" 
                     placeholder="Description" 
-                    rows="10" 
-                    readOnly
-                    defaultValue={this.props.conversation.description}/>
+                    rows="10"
+                    value={this.props.conversation.description}/>
             </div>
         );
     }

@@ -16,7 +16,7 @@ class AddDemand extends Component {
                     <div className="input-group">
                         <input id="demand-input" onChange={(e) => this.onChangeDemandName(e)}  type="text" className="form-control" placeholder="Demand"></input>
                         <span className="input-group-btn">
-                            <button onClick={(e) => this.onSubmitDemand(e)} type="submit" className="btn btn-default">Add</button>
+                            <button onClick={(e) => this.onSubmitDemand(e)} type="submit" className="btn btn-default add-demand-btn">Add</button>
                         </span>
                     </div>
                 </form>  

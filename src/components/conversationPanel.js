@@ -8,7 +8,7 @@ const eventClient = new EventClient();
 class ConversationPanel extends Component {
   render () {
     return (
-        <div className="row h-100"> 
+        <div className="row"> 
           <div className="col-md-6">
             <FileBrowser eventsClient={eventClient}/> 
           </div> 

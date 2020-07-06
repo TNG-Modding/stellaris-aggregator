@@ -52,3 +52,11 @@ html, body {
 .option-list-item {
   padding: 0px;
 }
+
+.list-group{
+  /* max-height: 50em; */
+  margin-bottom: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}

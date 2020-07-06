@@ -11,9 +11,9 @@ class ConversationViewer extends Component {
         }
         return (
             <div>
-            {/* <ConversationSourceList /> */}
+            <ConversationSourceList conversation={this.props.conversation}/>
             <ConversationEditor conversation={this.props.conversation}/>
-            {/* <DemandList/> */}
+            <DemandList conversation={this.props.conversation}/>
             </div>
         );
     }    

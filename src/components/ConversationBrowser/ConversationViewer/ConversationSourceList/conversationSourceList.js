@@ -5,11 +5,11 @@ class ConversationSourceList extends Component {
     render() {
         return (
         <div>
-            <p>Conversation Sources</p>
+            <h4>Sources</h4>
             <ul className="list-group">
-            {this.props.conversationSources.map(conversationSource => 
-                <ConversationSourceItem/>
-            )}
+                {this.props.conversation.optionLocations.map(conversationSource => 
+                    <ConversationSourceItem conversationSource={conversationSource}/>
+                )}
             </ul>
         </div>
         );

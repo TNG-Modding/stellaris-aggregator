@@ -9,6 +9,7 @@ class ConversationEditor extends Component {
     render() {
         return (
             <div className="ConversationEditor">
+                <h3>Conversation</h3>
                 <ConversationVarname conversation={this.props.conversation}/>
                 <ConversationName conversation={this.props.conversation}/>
                 <ConversationDescription conversation={this.props.conversation}/>

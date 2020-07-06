@@ -49,7 +49,7 @@ def ReadConversationsInFolder (directoryPath):
 
     for conversationFile in conversationFiles:
         with open(conversationFile, 'r') as jsonFile:
-            loadedConversations = json.load(jsonFile)
-            conversations = conversations + loadedConversations["conversations"]
+            loadedConversation = json.load(jsonFile)
+            conversations.append(loadedConversation)
 
     return conversations
