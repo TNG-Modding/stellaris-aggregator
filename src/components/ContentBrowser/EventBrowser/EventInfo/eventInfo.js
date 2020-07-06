@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import EventOverview from './eventOverview';
-import EventOptionList from './eventOptionList';
+import EventOptionList from './EventOptionList/eventOptionList';
 
 class EventInfo extends Component {
     render() {

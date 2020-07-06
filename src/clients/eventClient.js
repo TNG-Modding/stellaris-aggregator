@@ -6,7 +6,7 @@ class EventClient {
   parseEventFile (filepath) {
     var options = {
       method: 'post',
-      body: {directorypath:filepath},
+      body: {filepath:filepath},
       json: true,
       url: mainAddr + "/parse"
     };
@@ -26,6 +26,22 @@ class EventClient {
       body: {directorypath:filepath},
       json: true,
       url: mainAddr + "/files"
+    };
+    return new Promise(function (resolve, reject) {
+      request(options, (err, res, body) => {
+          if (err) { 
+            reject(err);  
+          }          
+          resolve(body);    
+      });
+    });
+  }
+  getConversations(directorypath) {
+    var options = {
+      method: 'post',
+      body: {directorypath:directorypath},
+      json: true,
+      url: mainAddr + "/conversations"
     };
     return new Promise(function (resolve, reject) {
       request(options, (err, res, body) => {

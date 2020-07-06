@@ -11,8 +11,8 @@ CORS(app)
 @app.route("/parse", methods=['POST'])
 def parse():
     """Parse a file"""
-    pprint(request.json["directorypath"])
-    directorypath = request.json["directorypath"]
+    pprint(request.json["filepath"])
+    directorypath = request.json["filepath"]
 
     filename = os.path.splitext(os.path.basename(directorypath))[0]
     jsonOutputFilepath = os.path.dirname(directorypath) + "/" + filename + ".json"
@@ -54,11 +54,12 @@ def parseAll():
                 json.dump(parsedContents, outputFile, indent=2)      
     return json.dumps({'success':True}), 200, {'ContentType':'application/json'} 
 
-@app.route("/conversations/<path:directorypath>", methods=['POST'])
-def conversations(directorypath):
-    conversations = ReadConversationsInFolder(directorypath)
-    print(conversations)
-    return conversations
+@app.route("/conversations", methods=['POST'])
+def conversations():
+    directorypath = request.json["directorypath"]
+    conversations = {}
+    conversations["conversations"] = ReadConversationsInFolder(directorypath)
+    return jsonify(conversations)
 
 @app.route("/localization/<path:localizationpath>", methods=['POST'])
 def localization(localizationpath):

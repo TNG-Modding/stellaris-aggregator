@@ -6,7 +6,7 @@ class EventOptionList extends Component {
         if (this.props.event === undefined || this.props.event.options === undefined) {
             console.log("Event has no options or is undefined")
             return (
-                <div><p>Options</p></div>
+                <div></div>
             )
         }
         return (

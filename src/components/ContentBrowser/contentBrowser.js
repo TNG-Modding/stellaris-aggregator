@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import FileList from "./FileList/fileList"
 import EventBrowser from "./EventBrowser/eventBrowser"
-import EventClient from "../../clients/eventClient"
-
-const eventClient = new EventClient();
 
 class ContentBrowser extends Component {
     constructor() {
@@ -24,12 +21,12 @@ class ContentBrowser extends Component {
     }
 
     async componentDidMount() {
-        const filepaths = await eventClient.getFiles("/Volumes/Storage/stellaris-defines/events");
+        const filepaths = await this.props.eventsClient.getFiles("/Volumes/Storage/stellaris-defines/events");
         this.updateFilepaths(filepaths["filepaths"])
     }
 
     openFileName = async (filepath) => {
-        const parsedFile = await eventClient.parseEventFile(filepath);
+        const parsedFile = await this.props.eventsClient.parseEventFile(filepath);
         console.log(parsedFile["file"]["events"])
         this.setState({events: parsedFile["file"]["events"], selectedFilepath:filepath})
     }
