@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import FileList from "./FileList/fileList"
 import EventBrowser from "./EventBrowser/eventBrowser"
 
-class ContentBrowser extends Component {
+class FileBrowser extends Component {
     constructor() {
         super();
         this.state = {
@@ -45,4 +45,4 @@ class ContentBrowser extends Component {
     }    
 }
 
-export default ContentBrowser;
+export default FileBrowser;

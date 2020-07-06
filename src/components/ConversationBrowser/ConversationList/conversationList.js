@@ -8,7 +8,12 @@ class ConversationList extends Component {
                 <p>Conversations</p>
                 <ul className="list-group">
                     {this.props.conversations.map((conversation, index) => 
-                        <ConversationListItem key={index} index={index} conversation={conversation}/>
+                        <ConversationListItem 
+                            key={index} 
+                            index={index}
+                            openConversationFn={this.props.openConversationFn} 
+                            conversation={conversation}
+                            selectedConversation={this.props.selectedConversation} />
                     )}            
                 </ul>
             </div>

@@ -37,16 +37,7 @@ html, body {
   height:100%; 
   min-height: 100%;
 }
-/* .list-group-item {
-  padding: 0;
-}
-.list-group-item:hover {
-  background-color: lightgray;
-}
 
-.file-item {
-  padding:0px 0px 0px 0px;
-} */
 .list-group {
   overflow: auto;
 }
@@ -60,8 +51,4 @@ html, body {
 }
 .option-list-item {
   padding: 0px;
-}
-
-.event-list-item {
-
 }

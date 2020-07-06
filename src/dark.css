@@ -13,31 +13,26 @@
 
 .form-control {
   background-color: #303030;
+  color: #f0f0f0;
   border: 1px solid #141414;
 }
 
 .form-control:focus {
   border: 1px solid #141414;
   background-color: #424242;
+  color: #f0f0f0;
 }
 
-.active-file-item {
-  background-color: #262626;
-}
-.active-file-item:hover {
+.active-file-item:hover, .active-event-item:hover, .active-conversation-item:hover {
   background-color: #262626;
   cursor: default;
 }
 
-.active-event-item {
-  background-color: #262626;
-}
-.active-event-item:hover {
-  background-color: #262626;
-  cursor: default;
-}
-
-.option-list-item, .event-list-item {
+.option-list-item, .event-list-item, .conversation-list-item {
   background-color: #303030;
   color: #f0f0f0;
+}
+
+.active-file-item, .active-event-item, .active-conversation-item {
+  background-color: #262626;
 }
